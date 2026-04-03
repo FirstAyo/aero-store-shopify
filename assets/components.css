@@ -2314,7 +2314,11 @@
 
 .instagram-gallery__placeholder {
   background:
-    radial-gradient(circle at 35% 30%, rgba(255, 255, 255, 0.45), transparent 20%),
+    radial-gradient(
+      circle at 35% 30%,
+      rgba(255, 255, 255, 0.45),
+      transparent 20%
+    ),
     linear-gradient(135deg, #d7d7d7, #bbbbbb);
 }
 
@@ -2396,5 +2400,316 @@
   .instagram-gallery__icon .icon {
     width: 30px;
     height: 30px;
+  }
+}
+
+/* =========================
+   Newsletter footer
+   - Desktop multi-column footer
+   - Mobile accordion footer
+========================= */
+
+.newsletter-footer {
+  background:
+    radial-gradient(circle at 8% 14%, rgba(20, 94, 120, 0.22), transparent 28%),
+    radial-gradient(circle at 88% 30%, rgba(110, 57, 38, 0.2), transparent 30%),
+    linear-gradient(90deg, #0d141c 0%, #1d1a21 52%, #2b1d1a 100%);
+  color: #fff;
+}
+
+.newsletter-footer__inner {
+  padding-top: 84px;
+  padding-bottom: 54px;
+}
+
+.newsletter-footer__top {
+  display: grid;
+  grid-template-columns: 1.2fr 0.9fr;
+  gap: 44px;
+  align-items: center;
+}
+
+.newsletter-footer__heading {
+  margin: 0;
+  max-width: 760px;
+  font-size: clamp(28px, 2.8vw, 48px);
+  line-height: 1.08;
+  letter-spacing: -0.04em;
+  font-weight: 700;
+}
+
+.newsletter-footer__form {
+  position: relative;
+  display: flex;
+  align-items: center;
+  min-height: 74px;
+  border: 1px solid rgba(255, 255, 255, 0.42);
+  border-radius: 999px;
+  padding: 8px;
+}
+
+.newsletter-footer__input {
+  flex: 1;
+  min-width: 0;
+  border: 0;
+  background: transparent;
+  color: #fff;
+  padding: 0 28px;
+  outline: none;
+  font-size: 18px;
+}
+
+.newsletter-footer__input::placeholder {
+  color: rgba(255, 255, 255, 0.72);
+}
+
+.newsletter-footer__submit {
+  min-width: 142px;
+  min-height: 56px;
+  border: 0;
+  border-radius: 999px;
+  background: #fff;
+  color: #111;
+  font-size: 18px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.newsletter-footer__divider {
+  height: 1px;
+  margin: 52px 0 42px;
+  background: rgba(255, 255, 255, 0.12);
+}
+
+/* Desktop columns */
+.newsletter-footer__columns--desktop {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 34px;
+}
+
+.newsletter-footer__accordion--mobile {
+  display: none;
+}
+
+.newsletter-footer__column-title {
+  margin: 0 0 24px;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1.3;
+}
+
+.newsletter-footer__links li + li {
+  margin-top: 16px;
+}
+
+.newsletter-footer__link {
+  color: rgba(255, 255, 255, 0.96);
+  text-decoration: none;
+  font-size: 17px;
+  line-height: 1.45;
+}
+
+.newsletter-footer__contact-text {
+  margin: 0 0 16px;
+  color: rgba(255, 255, 255, 0.92);
+  font-size: 17px;
+  line-height: 1.55;
+}
+
+.newsletter-footer__socials {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 18px;
+}
+
+.newsletter-footer__social {
+  width: 40px;
+  height: 40px;
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  border-radius: 999px;
+  display: grid;
+  place-items: center;
+  color: #fff;
+  text-decoration: none;
+}
+
+.newsletter-footer__social .icon {
+  width: 18px;
+  height: 18px;
+}
+
+/* Bottom bar */
+.newsletter-footer__bottom {
+  background: #efefef;
+  color: #555;
+}
+
+.newsletter-footer__bottom-inner {
+  min-height: 74px;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 20px;
+  align-items: center;
+}
+
+.newsletter-footer__copyright {
+  font-size: 16px;
+  line-height: 1.4;
+}
+
+.newsletter-footer__mobile-selectors {
+  display: none;
+}
+
+.newsletter-footer__payments {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.newsletter-footer__payment-icon {
+  width: auto;
+  height: 24px;
+  object-fit: contain;
+}
+
+/* Mobile accordion */
+.newsletter-footer__accordion-item {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.newsletter-footer__accordion-trigger {
+  width: 100%;
+  min-height: 64px;
+  border: 0;
+  background: transparent;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  text-align: left;
+  font-size: 17px;
+  font-weight: 700;
+  cursor: pointer;
+  padding: 0;
+}
+
+.newsletter-footer__accordion-plus {
+  font-size: 32px;
+  line-height: 1;
+  font-weight: 300;
+}
+
+.newsletter-footer__accordion-panel {
+  padding: 0 0 18px;
+}
+
+/* Tablet */
+@media screen and (max-width: 989px) {
+  .newsletter-footer__inner {
+    padding-top: 52px;
+    padding-bottom: 0;
+  }
+
+  .newsletter-footer__top {
+    grid-template-columns: 1fr;
+    gap: 22px;
+  }
+
+  .newsletter-footer__heading {
+    max-width: 560px;
+    font-size: 23px;
+  }
+
+  .newsletter-footer__form {
+    min-height: 58px;
+    padding: 5px;
+  }
+
+  .newsletter-footer__input {
+    padding: 0 20px;
+    font-size: 16px;
+  }
+
+  .newsletter-footer__submit {
+    min-width: 128px;
+    min-height: 46px;
+    font-size: 16px;
+  }
+
+  .newsletter-footer__divider {
+    margin: 34px 0 20px;
+  }
+
+  .newsletter-footer__columns--desktop {
+    display: none;
+  }
+
+  .newsletter-footer__accordion--mobile {
+    display: block;
+  }
+
+  .newsletter-footer__bottom-inner {
+    grid-template-columns: 1fr;
+    justify-items: center;
+    text-align: center;
+    padding: 22px 0 26px;
+  }
+
+  .newsletter-footer__mobile-selectors {
+    display: flex;
+    gap: 14px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .newsletter-footer__selector {
+    min-height: 42px;
+    padding: 0 18px;
+    border: 1px solid rgba(17, 17, 17, 0.18);
+    border-radius: 999px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: #444;
+    font-size: 15px;
+    background: #f7f7f7;
+  }
+}
+
+/* Small mobile */
+@media screen and (max-width: 749px) {
+  .newsletter-footer__heading {
+    font-size: 44px;
+    line-height: 1.18;
+  }
+
+  .newsletter-footer__input {
+    font-size: 15px;
+  }
+
+  .newsletter-footer__submit {
+    min-width: 126px;
+    font-size: 15px;
+  }
+
+  .newsletter-footer__column-title,
+  .newsletter-footer__accordion-trigger {
+    font-size: 16px;
+  }
+
+  .newsletter-footer__link,
+  .newsletter-footer__contact-text {
+    font-size: 15px;
+  }
+
+  .newsletter-footer__copyright {
+    font-size: 15px;
+  }
+
+  .newsletter-footer__payment-icon {
+    height: 20px;
   }
 }

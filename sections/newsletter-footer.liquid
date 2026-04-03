@@ -1,0 +1,402 @@
+<section class="newsletter-footer">
+  <div class="newsletter-footer__inner page-width">
+    <!-- Top newsletter area -->
+    <div class="newsletter-footer__top">
+      <div class="newsletter-footer__intro">
+        {% if section.settings.heading != blank %}
+          <h2 class="newsletter-footer__heading">{{ section.settings.heading }}</h2>
+        {% endif %}
+      </div>
+
+      <div class="newsletter-footer__form-wrap">
+        {% form 'customer', class: 'newsletter-footer__form' %}
+          <input type="hidden" name="contact[tags]" value="newsletter">
+
+          <label class="visually-hidden" for="FooterNewsletterEmail">
+            Email
+          </label>
+
+          <input
+            id="FooterNewsletterEmail"
+            type="email"
+            name="contact[email]"
+            class="newsletter-footer__input"
+            value="{{ form.email }}"
+            placeholder="{{ section.settings.placeholder }}"
+            autocorrect="off"
+            autocapitalize="off"
+            autocomplete="email"
+          >
+
+          <button type="submit" class="newsletter-footer__submit">
+            {{ section.settings.button_label }}
+          </button>
+        {% endform %}
+      </div>
+    </div>
+
+    <div class="newsletter-footer__divider"></div>
+
+    <!-- Desktop footer columns -->
+    <div class="newsletter-footer__columns newsletter-footer__columns--desktop">
+      {% for block in section.blocks %}
+        {% case block.type %}
+          {% when 'link_column' %}
+            <div class="newsletter-footer__column" {{ block.shopify_attributes }}>
+              {% if block.settings.heading != blank %}
+                <h3 class="newsletter-footer__column-title">{{ block.settings.heading }}</h3>
+              {% endif %}
+
+              {% if block.settings.menu != blank %}
+                <ul class="newsletter-footer__links list-unstyled">
+                  {% for link in block.settings.menu.links %}
+                    <li>
+                      <a href="{{ link.url }}" class="newsletter-footer__link">{{ link.title }}</a>
+                    </li>
+                  {% endfor %}
+                </ul>
+              {% endif %}
+            </div>
+
+          {% when 'contact_column' %}
+            <div class="newsletter-footer__column" {{ block.shopify_attributes }}>
+              {% if block.settings.heading != blank %}
+                <h3 class="newsletter-footer__column-title">{{ block.settings.heading }}</h3>
+              {% endif %}
+
+              <div class="newsletter-footer__contact">
+                {% if block.settings.address != blank %}
+                  <p class="newsletter-footer__contact-text">{{ block.settings.address }}</p>
+                {% endif %}
+
+                {% if block.settings.phone_1 != blank %}
+                  <p class="newsletter-footer__contact-text">{{ block.settings.phone_1 }}</p>
+                {% endif %}
+
+                {% if block.settings.phone_2 != blank %}
+                  <p class="newsletter-footer__contact-text">{{ block.settings.phone_2 }}</p>
+                {% endif %}
+
+                <div class="newsletter-footer__socials">
+                  {% if block.settings.instagram_url != blank %}
+                    <a href="{{ block.settings.instagram_url }}" class="newsletter-footer__social" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+                      {% render 'icon', icon: 'instagram' %}
+                    </a>
+                  {% endif %}
+
+                  {% if block.settings.twitter_url != blank %}
+                    <a href="{{ block.settings.twitter_url }}" class="newsletter-footer__social" target="_blank" rel="noopener noreferrer" aria-label="Twitter">
+                      {% render 'icon', icon: 'twitter' %}
+                    </a>
+                  {% endif %}
+
+                  {% if block.settings.facebook_url != blank %}
+                    <a href="{{ block.settings.facebook_url }}" class="newsletter-footer__social" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+                      {% render 'icon', icon: 'facebook' %}
+                    </a>
+                  {% endif %}
+
+                  {% if block.settings.youtube_url != blank %}
+                    <a href="{{ block.settings.youtube_url }}" class="newsletter-footer__social" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
+                      {% render 'icon', icon: 'youtube' %}
+                    </a>
+                  {% endif %}
+                </div>
+              </div>
+            </div>
+        {% endcase %}
+      {% endfor %}
+    </div>
+
+    <!-- Mobile accordion columns -->
+    <div class="newsletter-footer__accordion newsletter-footer__accordion--mobile" data-footer-accordion>
+      {% for block in section.blocks %}
+        {% case block.type %}
+          {% when 'link_column' %}
+            <div class="newsletter-footer__accordion-item" {{ block.shopify_attributes }}>
+              <button
+                type="button"
+                class="newsletter-footer__accordion-trigger"
+                data-footer-trigger
+                aria-expanded="false"
+              >
+                <span>{{ block.settings.heading }}</span>
+                <span class="newsletter-footer__accordion-plus">+</span>
+              </button>
+
+              <div class="newsletter-footer__accordion-panel" hidden>
+                {% if block.settings.menu != blank %}
+                  <ul class="newsletter-footer__links list-unstyled">
+                    {% for link in block.settings.menu.links %}
+                      <li>
+                        <a href="{{ link.url }}" class="newsletter-footer__link">{{ link.title }}</a>
+                      </li>
+                    {% endfor %}
+                  </ul>
+                {% endif %}
+              </div>
+            </div>
+
+          {% when 'contact_column' %}
+            <div class="newsletter-footer__accordion-item" {{ block.shopify_attributes }}>
+              <button
+                type="button"
+                class="newsletter-footer__accordion-trigger"
+                data-footer-trigger
+                aria-expanded="false"
+              >
+                <span>{{ block.settings.heading }}</span>
+                <span class="newsletter-footer__accordion-plus">+</span>
+              </button>
+
+              <div class="newsletter-footer__accordion-panel" hidden>
+                <div class="newsletter-footer__contact">
+                  {% if block.settings.address != blank %}
+                    <p class="newsletter-footer__contact-text">{{ block.settings.address }}</p>
+                  {% endif %}
+
+                  {% if block.settings.phone_1 != blank %}
+                    <p class="newsletter-footer__contact-text">{{ block.settings.phone_1 }}</p>
+                  {% endif %}
+
+                  {% if block.settings.phone_2 != blank %}
+                    <p class="newsletter-footer__contact-text">{{ block.settings.phone_2 }}</p>
+                  {% endif %}
+
+                  <div class="newsletter-footer__socials">
+                    {% if block.settings.instagram_url != blank %}
+                      <a href="{{ block.settings.instagram_url }}" class="newsletter-footer__social" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+                        {% render 'icon', icon: 'instagram' %}
+                      </a>
+                    {% endif %}
+
+                    {% if block.settings.twitter_url != blank %}
+                      <a href="{{ block.settings.twitter_url }}" class="newsletter-footer__social" target="_blank" rel="noopener noreferrer" aria-label="Twitter">
+                        {% render 'icon', icon: 'twitter' %}
+                      </a>
+                    {% endif %}
+
+                    {% if block.settings.facebook_url != blank %}
+                      <a href="{{ block.settings.facebook_url }}" class="newsletter-footer__social" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+                        {% render 'icon', icon: 'facebook' %}
+                      </a>
+                    {% endif %}
+
+                    {% if block.settings.youtube_url != blank %}
+                      <a href="{{ block.settings.youtube_url }}" class="newsletter-footer__social" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
+                        {% render 'icon', icon: 'youtube' %}
+                      </a>
+                    {% endif %}
+                  </div>
+                </div>
+              </div>
+            </div>
+        {% endcase %}
+      {% endfor %}
+    </div>
+  </div>
+
+  <!-- Bottom bar -->
+  <div class="newsletter-footer__bottom">
+    <div class="newsletter-footer__bottom-inner page-width">
+      <div class="newsletter-footer__copyright">
+        {{ section.settings.copyright_text }}
+      </div>
+
+      <div class="newsletter-footer__mobile-selectors">
+        <div class="newsletter-footer__selector">{{ section.settings.currency_label }}</div>
+        <div class="newsletter-footer__selector">{{ section.settings.language_label }}</div>
+      </div>
+
+      <div class="newsletter-footer__payments">
+        {% for block in section.blocks %}
+          {% if block.type == 'payment_icons' %}
+            {% if block.settings.payment_1 != blank %}
+              {{ block.settings.payment_1 | image_url: width: 120 | image_tag: class: 'newsletter-footer__payment-icon', loading: 'lazy', alt: 'Payment icon' }}
+            {% endif %}
+            {% if block.settings.payment_2 != blank %}
+              {{ block.settings.payment_2 | image_url: width: 120 | image_tag: class: 'newsletter-footer__payment-icon', loading: 'lazy', alt: 'Payment icon' }}
+            {% endif %}
+            {% if block.settings.payment_3 != blank %}
+              {{ block.settings.payment_3 | image_url: width: 120 | image_tag: class: 'newsletter-footer__payment-icon', loading: 'lazy', alt: 'Payment icon' }}
+            {% endif %}
+            {% if block.settings.payment_4 != blank %}
+              {{ block.settings.payment_4 | image_url: width: 120 | image_tag: class: 'newsletter-footer__payment-icon', loading: 'lazy', alt: 'Payment icon' }}
+            {% endif %}
+            {% if block.settings.payment_5 != blank %}
+              {{ block.settings.payment_5 | image_url: width: 120 | image_tag: class: 'newsletter-footer__payment-icon', loading: 'lazy', alt: 'Payment icon' }}
+            {% endif %}
+            {% if block.settings.payment_6 != blank %}
+              {{ block.settings.payment_6 | image_url: width: 120 | image_tag: class: 'newsletter-footer__payment-icon', loading: 'lazy', alt: 'Payment icon' }}
+            {% endif %}
+          {% endif %}
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Newsletter footer",
+  "tag": "section",
+  "class": "section-newsletter-footer",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Subscribe our Newsletter and get all of our update"
+    },
+    {
+      "type": "text",
+      "id": "placeholder",
+      "label": "Email placeholder",
+      "default": "Enter your email"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button label",
+      "default": "Submit Now"
+    },
+    {
+      "type": "text",
+      "id": "copyright_text",
+      "label": "Copyright text",
+      "default": "© 2026, Aero Shopify Theme"
+    },
+    {
+      "type": "text",
+      "id": "currency_label",
+      "label": "Mobile currency label",
+      "default": "CAD $ | Canada"
+    },
+    {
+      "type": "text",
+      "id": "language_label",
+      "label": "Mobile language label",
+      "default": "English"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "link_column",
+      "name": "Link column",
+      "settings": [
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Heading",
+          "default": "Quick Links"
+        },
+        {
+          "type": "link_list",
+          "id": "menu",
+          "label": "Menu"
+        }
+      ]
+    },
+    {
+      "type": "contact_column",
+      "name": "Contact column",
+      "settings": [
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Heading",
+          "default": "Contact Info"
+        },
+        {
+          "type": "textarea",
+          "id": "address",
+          "label": "Address",
+          "default": "70 Washington Square South, New York, NY 10012, United States"
+        },
+        {
+          "type": "text",
+          "id": "phone_1",
+          "label": "Phone 1",
+          "default": "+12345 678 910"
+        },
+        {
+          "type": "text",
+          "id": "phone_2",
+          "label": "Phone 2",
+          "default": "+12345 678 109"
+        },
+        {
+          "type": "url",
+          "id": "instagram_url",
+          "label": "Instagram URL"
+        },
+        {
+          "type": "url",
+          "id": "twitter_url",
+          "label": "Twitter URL"
+        },
+        {
+          "type": "url",
+          "id": "facebook_url",
+          "label": "Facebook URL"
+        },
+        {
+          "type": "url",
+          "id": "youtube_url",
+          "label": "YouTube URL"
+        }
+      ]
+    },
+    {
+      "type": "payment_icons",
+      "name": "Payment icons",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "payment_1",
+          "label": "Payment icon 1"
+        },
+        {
+          "type": "image_picker",
+          "id": "payment_2",
+          "label": "Payment icon 2"
+        },
+        {
+          "type": "image_picker",
+          "id": "payment_3",
+          "label": "Payment icon 3"
+        },
+        {
+          "type": "image_picker",
+          "id": "payment_4",
+          "label": "Payment icon 4"
+        },
+        {
+          "type": "image_picker",
+          "id": "payment_5",
+          "label": "Payment icon 5"
+        },
+        {
+          "type": "image_picker",
+          "id": "payment_6",
+          "label": "Payment icon 6"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Newsletter footer",
+      "blocks": [
+        { "type": "link_column" },
+        { "type": "link_column" },
+        { "type": "link_column" },
+        { "type": "link_column" },
+        { "type": "contact_column" },
+        { "type": "payment_icons" }
+      ]
+    }
+  ]
+}
+{% endschema %}

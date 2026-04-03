@@ -26,6 +26,9 @@
     },
       "instagram_gallery": {
     "type": "instagram-gallery"
+    },
+    "newsletter_footer": {
+  "type": "newsletter-footer"
     }
   },
   "order": [
@@ -37,6 +40,7 @@
     "featured_products",
     "countdown_offer",
     "testimonials_section",
-    "instagram_gallery"
+    "instagram_gallery",
+    "newsletter_footer"
   ]
 }
