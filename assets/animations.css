@@ -185,3 +185,13 @@
   transform: translateY(-3px);
   border-color: rgba(17, 17, 17, 0.24);
 }
+
+/* =========================
+   Instagram gallery polish
+========================= */
+
+.instagram-gallery__image,
+.instagram-gallery__overlay,
+.instagram-gallery__icon {
+  will-change: transform, opacity;
+}

@@ -23,7 +23,10 @@
     },
     "testimonials_section": {
   "type": "testimonials"
-}
+    },
+      "instagram_gallery": {
+    "type": "instagram-gallery"
+    }
   },
   "order": [
     "announcement_bar",
@@ -33,6 +36,7 @@
     "category_circles",
     "featured_products",
     "countdown_offer",
-    "testimonials_section"
+    "testimonials_section",
+    "instagram_gallery"
   ]
 }
