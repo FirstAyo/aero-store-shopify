@@ -1,0 +1,93 @@
+<div class="nav-drawer" id="NavDrawer" aria-hidden="true" data-nav-drawer>
+  <div class="nav-drawer__overlay" data-nav-close></div>
+
+  <div class="nav-drawer__panel">
+    <div class="nav-drawer__header">
+      <a href="{{ routes.root_url }}" class="nav-drawer__logo">
+        {% if section.settings.logo != blank %}
+          {{ section.settings.logo | image_url: width: 180 | image_tag: alt: shop.name }}
+        {% else %}
+          <span class="nav-drawer__store-name">{{ shop.name }}</span>
+        {% endif %}
+      </a>
+
+      <button class="nav-drawer__close" type="button" data-nav-close aria-label="Close menu">
+        {% render 'icon', icon: 'close' %}
+      </button>
+    </div>
+
+    <nav class="nav-drawer__nav" aria-label="Mobile navigation">
+      {% if menu_handle != blank %}
+        <ul class="nav-drawer__list" role="list">
+          {% for link in linklists[menu_handle].links %}
+            <li class="nav-drawer__item {% if link.links != blank %}has-children{% endif %}">
+              {% if link.links != blank %}
+                <button
+                  class="nav-drawer__trigger"
+                  type="button"
+                  aria-expanded="false"
+                  data-submenu-toggle
+                >
+                  <span>{{ link.title }}</span>
+                  <span class="nav-drawer__plus" aria-hidden="true"></span>
+                </button>
+
+                <div class="nav-drawer__submenu" hidden>
+                  <ul class="nav-drawer__sublist" role="list">
+                    {% for child_link in link.links %}
+                      <li>
+                        <a href="{{ child_link.url }}" class="nav-drawer__sublink">
+                          {{ child_link.title }}
+                        </a>
+                      </li>
+                    {% endfor %}
+                  </ul>
+                </div>
+              {% else %}
+                <a href="{{ link.url }}" class="nav-drawer__link">{{ link.title }}</a>
+              {% endif %}
+            </li>
+          {% endfor %}
+        </ul>
+      {% endif %}
+    </nav>
+
+    <div class="nav-drawer__footer">
+      <div class="nav-drawer__account">
+        <a href="{{ routes.account_url }}" class="nav-drawer__account-link">
+          {% render 'icon', icon: 'account' %}
+          <span>
+            {%- if customer %}Account{% else %}Log in{% endif -%}
+          </span>
+        </a>
+      </div>
+
+      <div class="nav-drawer__socials">
+        <a href="#" class="nav-drawer__social-link" aria-label="Instagram">
+          {% render 'icon', icon: 'instagram' %}
+        </a>
+        <a href="#" class="nav-drawer__social-link" aria-label="Twitter">
+          {% render 'icon', icon: 'twitter' %}
+        </a>
+        <a href="#" class="nav-drawer__social-link" aria-label="Facebook">
+          {% render 'icon', icon: 'facebook' %}
+        </a>
+        <a href="#" class="nav-drawer__social-link" aria-label="YouTube">
+          {% render 'icon', icon: 'youtube' %}
+        </a>
+      </div>
+
+      <div class="nav-drawer__selectors">
+        <button type="button" class="nav-drawer__selector">
+          <span>{{ cart.currency.iso_code }} $</span>
+          <span class="nav-drawer__selector-chevron">⌄</span>
+        </button>
+
+        <button type="button" class="nav-drawer__selector">
+          <span>En</span>
+          <span class="nav-drawer__selector-chevron">⌄</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

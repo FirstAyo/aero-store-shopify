@@ -1,0 +1,8 @@
+{% assign button_style = style | default: 'primary' %}
+
+<a
+  href="{{ link | default: '#' }}"
+  class="theme-button theme-button--{{ button_style }}"
+>
+  {{ label }}
+</a>

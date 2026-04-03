@@ -1,0 +1,99 @@
+{% if section.settings.show_announcement_bar %}
+  <div class="announcement-bar color-scheme-{{ section.settings.color_scheme }}">
+    <div class="page-width announcement-bar__inner">
+      <div class="announcement-bar__left">
+        {% if section.settings.shipping_text != blank %}
+          <p class="announcement-bar__text">{{ section.settings.shipping_text }}</p>
+        {% endif %}
+      </div>
+
+      <div class="announcement-bar__center">
+        {% if section.settings.tracking_label != blank and section.settings.tracking_link != blank %}
+          <a href="{{ section.settings.tracking_link }}" class="announcement-bar__link">
+            {{ section.settings.tracking_label }}
+          </a>
+        {% endif %}
+
+        {% if section.settings.store_finder_label != blank and section.settings.store_finder_link != blank %}
+          <a href="{{ section.settings.store_finder_link }}" class="announcement-bar__link">
+            {{ section.settings.store_finder_label }}
+          </a>
+        {% endif %}
+      </div>
+
+      <div class="announcement-bar__right">
+        {% if section.settings.show_currency_code %}
+          <span class="announcement-bar__meta">{{ cart.currency.iso_code }}</span>
+        {% endif %}
+
+        {% if section.settings.language_label != blank %}
+          <span class="announcement-bar__meta">{{ section.settings.language_label }}</span>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+{% endif %}
+
+{% schema %}
+{
+  "name": "Announcement bar",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "show_announcement_bar",
+      "label": "Show announcement bar",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "shipping_text",
+      "label": "Left text",
+      "default": "Free Delivery on orders over $250"
+    },
+    {
+      "type": "text",
+      "id": "tracking_label",
+      "label": "Tracking label",
+      "default": "Track your order"
+    },
+    {
+      "type": "url",
+      "id": "tracking_link",
+      "label": "Tracking link"
+    },
+    {
+      "type": "text",
+      "id": "store_finder_label",
+      "label": "Store finder label",
+      "default": "Find a Store"
+    },
+    {
+      "type": "url",
+      "id": "store_finder_link",
+      "label": "Store finder link"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_currency_code",
+      "label": "Show currency code",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "language_label",
+      "label": "Language label",
+      "default": "EN"
+    },
+    {
+      "type": "select",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "dark",
+      "options": [
+        { "value": "dark", "label": "Dark" },
+        { "value": "light", "label": "Light" }
+      ]
+    }
+  ]
+}
+{% endschema %}

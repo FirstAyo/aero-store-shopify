@@ -1,0 +1,152 @@
+<header
+  class="site-header {% if section.settings.enable_sticky_header %}site-header--sticky{% endif %} {% if section.settings.transparent_header %}site-header--transparent{% endif %}"
+  data-section-id="{{ section.id }}"
+>
+  <div class="page-width">
+    <div class="site-header__inner">
+      <div class="site-header__left">
+        <button
+          class="site-header__menu-toggle"
+          type="button"
+          aria-expanded="false"
+          aria-controls="NavDrawer"
+          data-nav-toggle
+        >
+          {% render 'icon', icon: 'menu' %}
+          <span class="visually-hidden">Open menu</span>
+        </button>
+
+        <nav class="site-header__desktop-nav" aria-label="Primary navigation">
+          {% if section.settings.menu != blank %}
+            <ul class="site-nav list-unstyled" role="list">
+              {% for link in linklists[section.settings.menu].links %}
+                <li class="site-nav__item {% if link.links != blank %}site-nav__item--has-children{% endif %}">
+                  <a href="{{ link.url }}" class="site-nav__link">
+                    {{ link.title }}
+                  </a>
+
+                  {% if link.links != blank %}
+                    {% render 'mega-menu', parent_link: link %}
+                  {% endif %}
+                </li>
+              {% endfor %}
+            </ul>
+          {% endif %}
+        </nav>
+      </div>
+
+      <div class="site-header__center">
+        <a href="{{ routes.root_url }}" class="site-header__logo-link">
+          {% if section.settings.logo != blank %}
+            {{
+              section.settings.logo
+              | image_url: width: section.settings.logo_width
+              | image_tag: class: 'site-header__logo', alt: shop.name
+            }}
+          {% else %}
+            <span class="site-header__store-name">{{ shop.name }}</span>
+          {% endif %}
+        </a>
+      </div>
+
+      <div class="site-header__right">
+        <div class="site-header__icons">
+          {% if section.settings.show_search %}
+            <a href="{{ routes.search_url }}" class="site-header__icon-link">
+              {% render 'icon', icon: 'search' %}
+              <span class="visually-hidden">Search</span>
+            </a>
+          {% endif %}
+
+          {% if section.settings.show_account %}
+            <a href="{{ routes.account_url }}" class="site-header__icon-link">
+              {% render 'icon', icon: 'account' %}
+              <span class="visually-hidden">Account</span>
+            </a>
+          {% endif %}
+
+          {% if section.settings.show_wishlist %}
+            <a href="/pages/wishlist" class="site-header__icon-link">
+              {% render 'icon', icon: 'heart' %}
+              <span class="visually-hidden">Wishlist</span>
+            </a>
+          {% endif %}
+
+          {% if section.settings.show_cart %}
+            <a href="{{ routes.cart_url }}" class="site-header__icon-link site-header__cart-link">
+              {% render 'icon', icon: 'cart' %}
+              <span class="visually-hidden">Cart</span>
+              <span class="site-header__cart-count">{{ cart.item_count }}</span>
+            </a>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  {% render 'nav-drawer', menu_handle: section.settings.menu %}
+</header>
+
+{% schema %}
+{
+  "name": "Header",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "Logo"
+    },
+    {
+      "type": "range",
+      "id": "logo_width",
+      "label": "Logo width",
+      "min": 60,
+      "max": 220,
+      "step": 10,
+      "default": 100,
+      "unit": "px"
+    },
+    {
+      "type": "link_list",
+      "id": "menu",
+      "label": "Main menu"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_sticky_header",
+      "label": "Enable sticky header",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "transparent_header",
+      "label": "Transparent header",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_search",
+      "label": "Show search icon",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_account",
+      "label": "Show account icon",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_wishlist",
+      "label": "Show wishlist icon",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_cart",
+      "label": "Show cart icon",
+      "default": true
+    }
+  ]
+}
+{% endschema %}

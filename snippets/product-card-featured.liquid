@@ -1,0 +1,104 @@
+{% assign first_variant = product.selected_or_first_available_variant %}
+{% assign featured_media = product.featured_media %}
+{% assign secondary_media = product.media[1] %}
+
+<article
+  class="product-card-featured"
+  data-product-card
+  data-product-id="{{ product.id }}"
+  data-product-handle="{{ product.handle }}"
+>
+  <div class="product-card-featured__media-wrap">
+    {% if product.compare_at_price_max > product.price %}
+      <span class="product-card-featured__badge">SALE</span>
+    {% endif %}
+
+    <div class="product-card-featured__actions">
+      <button
+        type="button"
+        class="product-card-featured__action"
+        data-quick-view-open
+        data-product-handle="{{ product.handle }}"
+        aria-label="Quick view"
+      >
+        <span class="product-card-featured__action-icon">+</span>
+        <span class="product-card-featured__tooltip">Quick View</span>
+      </button>
+
+      <button
+        type="button"
+        class="product-card-featured__action"
+        data-compare-toggle
+        data-product-id="{{ product.id }}"
+        aria-label="Compare"
+      >
+        <span class="product-card-featured__action-icon">⇄</span>
+        <span class="product-card-featured__tooltip">Add To Compare</span>
+      </button>
+
+      <button
+        type="button"
+        class="product-card-featured__action"
+        data-wishlist-toggle
+        data-product-id="{{ product.id }}"
+        aria-label="Wishlist"
+      >
+        <span class="product-card-featured__action-icon">♡</span>
+        <span class="product-card-featured__tooltip">Add To Wishlist</span>
+      </button>
+    </div>
+
+    <a href="{{ product.url }}" class="product-card-featured__media-link">
+      {% if featured_media != blank %}
+        {{
+          featured_media
+          | image_url: width: 900
+          | image_tag:
+            class: 'product-card-featured__image product-card-featured__image--primary',
+            loading: 'lazy',
+            alt: product.title
+        }}
+      {% endif %}
+
+      {% if secondary_media != blank %}
+        {{
+          secondary_media
+          | image_url: width: 900
+          | image_tag:
+            class: 'product-card-featured__image product-card-featured__image--secondary',
+            loading: 'lazy',
+            alt: product.title
+        }}
+      {% endif %}
+    </a>
+  </div>
+
+  <div class="product-card-featured__content">
+    <h3 class="product-card-featured__title">
+      <a href="{{ product.url }}">{{ product.title }}</a>
+    </h3>
+
+    <div class="product-card-featured__price">
+      {% if first_variant.compare_at_price > first_variant.price %}
+        <span class="product-card-featured__price-current">
+          {{ first_variant.price | money }}
+        </span>
+        <span class="product-card-featured__price-compare">
+          {{ first_variant.compare_at_price | money }}
+        </span>
+      {% else %}
+        {% if product.price_varies %}
+          <span class="product-card-featured__price-current"> From {{ product.price_min | money }} </span>
+        {% else %}
+          <span class="product-card-featured__price-current">
+            {{ first_variant.price | money }}
+          </span>
+        {% endif %}
+      {% endif %}
+    </div>
+  </div>
+
+  <script type="application/json" class="product-card-featured__json">
+    {{ product | json }}
+  </script>
+</article>

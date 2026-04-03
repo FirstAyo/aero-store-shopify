@@ -1,0 +1,10 @@
+{% if image != blank %}
+  {{
+    image
+    | image_url: width: width
+    | default: 1200
+    | image_tag: loading: loading
+    | default: 'lazy', class: class, alt: alt
+    | default: shop.name
+  }}
+{% endif %}

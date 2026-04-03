@@ -1,0 +1,30 @@
+{
+  "sections": {
+    "announcement_bar": {
+      "type": "announcement-bar"
+    },
+    "header": {
+      "type": "header"
+    },
+    "hero": {
+      "type": "hero-slider"
+    },
+    "promo_cards": {
+      "type": "promo-card-row"
+    },
+    "category_circles": {
+      "type": "category-circles"
+    },
+    "featured_products": {
+  "type": "featured-products"
+    }
+  },
+  "order": [
+    "announcement_bar",
+    "header",
+    "hero",
+    "promo_cards",
+    "category_circles",
+    "featured_products"
+  ]
+}

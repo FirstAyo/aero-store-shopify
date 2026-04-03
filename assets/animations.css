@@ -1,0 +1,162 @@
+/* =========================
+   Performance hints
+   These elements animate or transition often
+========================= */
+.site-header,
+.announcement-bar,
+.mega-menu__inner,
+.nav-drawer__panel {
+  will-change: transform, opacity;
+}
+
+/* =========================
+   Shared UI transitions
+========================= */
+.site-header__logo-link,
+.site-nav__link,
+.site-header__icon-link,
+.nav-drawer__link {
+  transition: all 0.3s ease;
+}
+
+/* =========================
+   Hero content animation
+   Fades content upward on load
+========================= */
+.hero-slide__content > * {
+  animation: heroFadeUp 0.7s ease both;
+}
+
+/* Stagger the text/button elements slightly */
+.hero-slide__content > *:nth-child(2) {
+  animation-delay: 0.08s;
+}
+
+.hero-slide__content > *:nth-child(3) {
+  animation-delay: 0.16s;
+}
+
+.hero-slide__content > *:nth-child(4) {
+  animation-delay: 0.24s;
+}
+
+/* =========================
+   Hero artwork animation
+   Product and base float independently
+========================= */
+.hero-slide__product-image {
+  animation: heroFloatProduct 4.8s ease-in-out infinite;
+}
+
+.hero-slide__base-image {
+  animation: heroFloatBase 5.4s ease-in-out infinite;
+}
+
+/* Content fade-up */
+@keyframes heroFadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Main product float */
+@keyframes heroFloatProduct {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+/* Decorative base/platform float */
+@keyframes heroFloatBase {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(6px);
+  }
+}
+
+/* =========================
+   Hero slider animation
+   Soft content fade-up only
+========================= */
+
+.hero-slide__content > * {
+  animation: heroFadeUp 0.7s ease both;
+}
+
+.hero-slide__content > *:nth-child(2) {
+  animation-delay: 0.08s;
+}
+
+.hero-slide__content > *:nth-child(3) {
+  animation-delay: 0.16s;
+}
+
+.hero-slide__content > *:nth-child(4) {
+  animation-delay: 0.24s;
+}
+
+@keyframes heroFadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* =========================
+   Promo card animation
+   Smooth hover lift for content and bg zoom support
+========================= */
+.promo-card,
+.promo-card__bg,
+.promo-card__content {
+  will-change: transform;
+}
+
+/* Smooth text movement on hover */
+.promo-card__content > * {
+  transition:
+    transform 0.35s ease,
+    opacity 0.35s ease;
+}
+
+/* Slight lift for card text on hover */
+.promo-card:hover .promo-card__content > * {
+  transform: translateY(-2px);
+}
+
+/* =========================
+   Category circles animation
+========================= */
+
+.category-circle-card__image,
+.category-circle-card__content {
+  will-change: transform;
+}
+
+.category-circle-card__content {
+  transition: transform 0.3s ease;
+}
+
+.category-circle-card:hover .category-circle-card__content {
+  transform: translateY(-2px);
+}

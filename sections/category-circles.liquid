@@ -1,0 +1,113 @@
+<section class="category-circles">
+  <div class="page-width">
+    <div class="category-circles__header">
+      {% if section.settings.heading != blank %}
+        <h2 class="category-circles__heading">{{ section.settings.heading }}</h2>
+      {% endif %}
+
+      {% if section.settings.text != blank %}
+        <div class="category-circles__text">
+          {{ section.settings.text }}
+        </div>
+      {% endif %}
+    </div>
+
+    <div class="category-circles__grid">
+      {% for block in section.blocks %}
+        {% assign collection = block.settings.collection %}
+
+        {% if collection != blank %}
+          <a
+            href="{{ collection.url }}"
+            class="category-circle-card"
+            {{ block.shopify_attributes }}
+          >
+            <div class="category-circle-card__image-wrap">
+              {% if block.settings.custom_image != blank %}
+                {{
+                  block.settings.custom_image
+                  | image_url: width: 700
+                  | image_tag: class: 'category-circle-card__image', loading: 'lazy', alt: collection.title
+                }}
+              {% elsif collection.image != blank %}
+                {{
+                  collection.image
+                  | image_url: width: 700
+                  | image_tag: class: 'category-circle-card__image', loading: 'lazy', alt: collection.title
+                }}
+              {% elsif collection.products.first.featured_image != blank %}
+                {{
+                  collection.products.first.featured_image
+                  | image_url: width: 700
+                  | image_tag: class: 'category-circle-card__image', loading: 'lazy', alt: collection.title
+                }}
+              {% else %}
+                <div class="category-circle-card__image category-circle-card__image--placeholder"></div>
+              {% endif %}
+            </div>
+
+            <div class="category-circle-card__content">
+              <h3 class="category-circle-card__title">{{ collection.title }}</h3>
+              <p class="category-circle-card__count">
+                {{ collection.products_count }} Item{% if collection.products_count != 1 %}s{% endif %}
+              </p>
+            </div>
+          </a>
+        {% endif %}
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Category circles",
+  "tag": "section",
+  "class": "section-category-circles",
+  "max_blocks": 8,
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Choose your Category"
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Text",
+      "default": "<p>Smartwatches provide quick access to notifications, calls, messages, and apps right on your wrist, reducing the constantly check your phone.</p>"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "category",
+      "name": "Category card",
+      "settings": [
+        {
+          "type": "collection",
+          "id": "collection",
+          "label": "Collection"
+        },
+        {
+          "type": "image_picker",
+          "id": "custom_image",
+          "label": "Custom image override"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Category circles",
+      "blocks": [
+        { "type": "category" },
+        { "type": "category" },
+        { "type": "category" },
+        { "type": "category" },
+        { "type": "category" }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,11 @@
+<div class="mega-menu">
+  <div class="mega-menu__inner">
+    <ul class="mega-menu__list" role="list">
+      {% for child_link in parent_link.links %}
+        <li class="mega-menu__item">
+          <a href="{{ child_link.url }}" class="mega-menu__link">{{ child_link.title }}</a>
+        </li>
+      {% endfor %}
+    </ul>
+  </div>
+</div>
