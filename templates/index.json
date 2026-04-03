@@ -20,7 +20,10 @@
     },
     "countdown_offer": {
   "type": "countdown-offer"
-    }
+    },
+    "testimonials_section": {
+  "type": "testimonials"
+}
   },
   "order": [
     "announcement_bar",
@@ -29,6 +32,7 @@
     "promo_cards",
     "category_circles",
     "featured_products",
-    "countdown_offer"
+    "countdown_offer",
+    "testimonials_section"
   ]
 }
