@@ -17,6 +17,9 @@
     },
     "featured_products": {
   "type": "featured-products"
+    },
+    "countdown_offer": {
+  "type": "countdown-offer"
     }
   },
   "order": [
@@ -25,6 +28,7 @@
     "hero",
     "promo_cards",
     "category_circles",
-    "featured_products"
+    "featured_products",
+    "countdown_offer"
   ]
 }

@@ -160,3 +160,13 @@
 .category-circle-card:hover .category-circle-card__content {
   transform: translateY(-2px);
 }
+
+/* =========================
+   Countdown offer animation
+========================= */
+
+.countdown-offer__card,
+.countdown-offer__card-bg,
+.countdown-offer__card-content {
+  will-change: transform;
+}
