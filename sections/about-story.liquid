@@ -1,0 +1,74 @@
+<section class="about-story">
+  <div class="page-width">
+    <div class="about-story__grid">
+      <div class="about-story__content">
+        {% if section.settings.heading != blank %}
+          <h2 class="about-story__heading">{{ section.settings.heading }}</h2>
+        {% endif %}
+
+        {% if section.settings.text != blank %}
+          <div class="about-story__text">
+            {{ section.settings.text }}
+          </div>
+        {% endif %}
+
+        {% if section.settings.mission_heading != blank %}
+          <h3 class="about-story__subheading">{{ section.settings.mission_heading }}</h3>
+        {% endif %}
+        {% if section.settings.mission_text != blank %}
+          <div class="about-story__subtext">{{ section.settings.mission_text }}</div>
+        {% endif %}
+
+        {% if section.settings.vision_heading != blank %}
+          <h3 class="about-story__subheading">{{ section.settings.vision_heading }}</h3>
+        {% endif %}
+        {% if section.settings.vision_text != blank %}
+          <div class="about-story__subtext">{{ section.settings.vision_text }}</div>
+        {% endif %}
+      </div>
+
+      <div class="about-story__media">
+        {% if section.settings.image != blank %}
+          {{
+            section.settings.image
+            | image_url: width: 1400
+            | image_tag: class: 'about-story__image', loading: 'lazy', alt: section.settings.heading
+          }}
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "About story",
+  "tag": "section",
+  "class": "section-about-story",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Our story and how we grow up" },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Text",
+      "default": "<p>The Best electronics products continue to drive innovation and shape the way we live, work, and interact with our environment opportunities for an customers to test out products before making a purchase.</p>"
+    },
+    { "type": "text", "id": "mission_heading", "label": "Mission heading", "default": "Our Mission" },
+    {
+      "type": "richtext",
+      "id": "mission_text",
+      "label": "Mission text",
+      "default": "<p>To be world most products continue to drive innovation and shape the way we live, work, and interact with our environment opportunities for an customers to test out products before making a purchase.</p>"
+    },
+    { "type": "text", "id": "vision_heading", "label": "Vision heading", "default": "Our Vision" },
+    {
+      "type": "richtext",
+      "id": "vision_text",
+      "label": "Vision text",
+      "default": "<p>To be world most products continue to drive innovation and shape the way we live, work, and interact with our environment opportunities for an customers to test out products before making a purchase.</p>"
+    },
+    { "type": "image_picker", "id": "image", "label": "Image" }
+  ],
+  "presets": [{ "name": "About story" }]
+}
+{% endschema %}

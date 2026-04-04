@@ -1,0 +1,59 @@
+<section class="about-features-row">
+  <div class="page-width">
+    <div class="about-features-row__grid">
+      {% for block in section.blocks %}
+        <div class="about-features-row__item" {{ block.shopify_attributes }}>
+          <div class="about-features-row__icon-wrap">
+            {% if block.settings.icon_image != blank %}
+              {{
+                block.settings.icon_image
+                | image_url: width: 120
+                | image_tag:
+                  class: 'about-features-row__icon-image',
+                  loading: 'lazy',
+                  alt: block.settings.title
+              }}
+            {% else %}
+              <span class="about-features-row__icon-circle"></span>
+            {% endif %}
+          </div>
+
+          <div class="about-features-row__content">
+            <h3 class="about-features-row__title">{{ block.settings.title }}</h3>
+            <p class="about-features-row__text">{{ block.settings.text }}</p>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "About features row",
+  "tag": "section",
+  "class": "section-about-features-row",
+  "max_blocks": 3,
+  "blocks": [
+    {
+      "type": "feature",
+      "name": "Feature",
+      "settings": [
+        { "type": "image_picker", "id": "icon_image", "label": "Icon image" },
+        { "type": "text", "id": "title", "label": "Title", "default": "Free Shipping" },
+        { "type": "text", "id": "text", "label": "Text", "default": "Free shipping for order over $250" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "About features row",
+      "blocks": [
+        { "type": "feature" },
+        { "type": "feature" },
+        { "type": "feature" }
+      ]
+    }
+  ]
+}
+{% endschema %}

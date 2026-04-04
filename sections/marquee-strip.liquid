@@ -1,0 +1,33 @@
+<section class="marquee-strip">
+  <div class="marquee-strip__viewport">
+    <div class="marquee-strip__track">
+      {% for i in (1..8) %}
+        <span class="marquee-strip__item">
+          {{ section.settings.text }}
+          <span class="marquee-strip__dot">✦</span>
+        </span>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Marquee strip",
+  "tag": "section",
+  "class": "section-marquee-strip",
+  "settings": [
+    {
+      "type": "text",
+      "id": "text",
+      "label": "Text",
+      "default": "Welcome to our store"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Marquee strip"
+    }
+  ]
+}
+{% endschema %}

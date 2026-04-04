@@ -1,0 +1,78 @@
+<section class="about-intro">
+  <div class="page-width">
+    <div class="about-intro__grid">
+      <div class="about-intro__media">
+        {% if section.settings.image != blank %}
+          {{
+            section.settings.image
+            | image_url: width: 1400
+            | image_tag: class: 'about-intro__image', loading: 'lazy', alt: section.settings.heading
+          }}
+        {% endif %}
+      </div>
+
+      <div class="about-intro__content">
+        {% if section.settings.heading != blank %}
+          <h2 class="about-intro__heading">{{ section.settings.heading }}</h2>
+        {% endif %}
+
+        {% if section.settings.text != blank %}
+          <div class="about-intro__text">
+            {{ section.settings.text }}
+          </div>
+        {% endif %}
+
+        <div class="about-intro__points">
+          {% if section.settings.point_1 != blank %}
+            <p>• {{ section.settings.point_1 }}</p>
+          {% endif %}
+          {% if section.settings.point_2 != blank %}
+            <p>• {{ section.settings.point_2 }}</p>
+          {% endif %}
+          {% if section.settings.point_3 != blank %}
+            <p>• {{ section.settings.point_3 }}</p>
+          {% endif %}
+          {% if section.settings.point_4 != blank %}
+            <p>• {{ section.settings.point_4 }}</p>
+          {% endif %}
+        </div>
+
+        {% if section.settings.button_label != blank %}
+          <a href="{{ section.settings.button_link | default: '#' }}" class="about-intro__button">
+            {{ section.settings.button_label }}
+          </a>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "About intro",
+  "tag": "section",
+  "class": "section-about-intro",
+  "settings": [
+    { "type": "image_picker", "id": "image", "label": "Image" },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Our Dream is to be a Global Electronic Brand"
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Text",
+      "default": "<p>The Best electronics products continue to drive innovation and shape the way we live, work, and interact with our environment opportunities for an customers to test out products before making a purchase. This can more include hands-on demonstrations features and functionalities, allowing customers to experience the product decisions.</p>"
+    },
+    { "type": "text", "id": "point_1", "label": "Point 1", "default": "Latest Technology" },
+    { "type": "text", "id": "point_2", "label": "Point 2", "default": "Quick Servicing" },
+    { "type": "text", "id": "point_3", "label": "Point 3", "default": "Best R&D Team" },
+    { "type": "text", "id": "point_4", "label": "Point 4", "default": "Expert Team" },
+    { "type": "text", "id": "button_label", "label": "Button label", "default": "Shop Now" },
+    { "type": "url", "id": "button_link", "label": "Button link" }
+  ],
+  "presets": [{ "name": "About intro" }]
+}
+{% endschema %}

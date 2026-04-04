@@ -1,0 +1,38 @@
+{
+  "sections": {
+    "hero": {
+      "type": "page-hero-simple",
+      "settings": {
+        "heading": "About Us",
+        "breadcrumb_label": "about-us"
+      }
+    },
+    "about_intro": {
+      "type": "about-intro"
+    },
+    "about_features": {
+      "type": "about-features-row"
+    },
+    "about_story": {
+      "type": "about-story"
+    },
+    "team_slider": {
+      "type": "team-slider"
+    },
+    "marquee_strip": {
+      "type": "marquee-strip"
+    },
+    "newsletter_footer": {
+      "type": "newsletter-footer"
+    }
+  },
+  "order": [
+    "hero",
+    "about_intro",
+    "about_features",
+    "about_story",
+    "team_slider",
+    "marquee_strip",
+    "newsletter_footer"
+  ]
+}
