@@ -1,0 +1,72 @@
+<section class="faq-accordion-section">
+  <div class="page-width">
+    {% if section.settings.heading != blank %}
+      <h2 class="faq-accordion-section__heading">{{ section.settings.heading }}</h2>
+    {% endif %}
+
+    <div class="faq-accordion" data-faq-accordion>
+      {% for block in section.blocks %}
+        <div class="faq-accordion__item" {{ block.shopify_attributes }}>
+          <button
+            type="button"
+            class="faq-accordion__trigger"
+            data-faq-trigger
+            aria-expanded="false"
+          >
+            <span class="faq-accordion__question">{{ block.settings.question }}</span>
+            <span class="faq-accordion__icon">+</span>
+          </button>
+
+          <div class="faq-accordion__panel" hidden>
+            <div class="faq-accordion__answer">
+              {{ block.settings.answer }}
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "FAQ accordion",
+  "tag": "section",
+  "class": "section-faq-accordion",
+  "max_blocks": 20,
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Shipping information"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "faq",
+      "name": "FAQ item",
+      "settings": [
+        {
+          "type": "text",
+          "id": "question",
+          "label": "Question",
+          "default": "Do we offer any warranties on our cars?"
+        },
+        {
+          "type": "richtext",
+          "id": "answer",
+          "label": "Answer",
+          "default": "<p>Yes. We provide warranty coverage based on the product and brand policy. You can check the warranty details on the product page or contact support for help.</p>"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "FAQ accordion",
+      "blocks": [{ "type": "faq" }, { "type": "faq" }, { "type": "faq" }]
+    }
+  ]
+}
+{% endschema %}

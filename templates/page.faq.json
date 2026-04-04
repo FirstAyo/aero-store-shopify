@@ -1,0 +1,25 @@
+{
+  "sections": {
+    "hero": {
+      "type": "page-hero-simple",
+      "settings": {
+        "heading": "faq",
+        "breadcrumb_label": "faq"
+      }
+    },
+    "faq_content": {
+      "type": "faq-accordion",
+      "settings": {
+        "heading": "Shipping information"
+      }
+    },
+    "newsletter_footer": {
+      "type": "newsletter-footer"
+    }
+  },
+  "order": [
+    "hero",
+    "faq_content",
+    "newsletter_footer"
+  ]
+}
