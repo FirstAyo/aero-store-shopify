@@ -1,0 +1,22 @@
+<section class="page-hero-simple">
+  <div class="page-width">
+    <div class="page-hero-simple__box">
+      <h1 class="page-hero-simple__heading">{{ collection.title }}</h1>
+
+      <div class="page-hero-simple__breadcrumb">
+        <a href="{{ routes.root_url }}">Home</a>
+        <span>/</span>
+        <span>{{ collection.title | downcase }}</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Collection hero",
+  "tag": "section",
+  "class": "section-collection-hero",
+  "settings": []
+}
+{% endschema %}
