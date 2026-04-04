@@ -11,3 +11,8 @@
 #
 # Ignore templates and sections with a regular expression:
 #   /(templates|sections)/.*\.json/
+
+# Ignore the settings_data.json file, which contains theme settings and should not be version controlled
+config/settings_data.json
+.DS_Store
+Thumbs.db

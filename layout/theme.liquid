@@ -24,8 +24,8 @@
     <script src="{{ 'countdown.js' | asset_url }}" defer></script>
     <script src="{{ 'testimonials.js' | asset_url }}" defer></script>
     <script src="{{ 'footer.js' | asset_url }}" defer></script>
-    <script src="{{ 'team-slider.js' | asset_url }}" defer></script>
     <script src="{{ 'faq.js' | asset_url }}" defer></script>
+    <script src="{{ 'team-slider.js' | asset_url }}" defer></script>
   </head>
 
   <body>
@@ -36,5 +36,7 @@
     <main id="MainContent" role="main">
       {{ content_for_layout }}
     </main>
+
+    {% sections 'footer-group' %}
   </body>
 </html>

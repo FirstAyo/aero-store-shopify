@@ -21,9 +21,6 @@
     },
     "marquee_strip": {
       "type": "marquee-strip"
-    },
-    "newsletter_footer": {
-      "type": "newsletter-footer"
     }
   },
   "order": [
@@ -32,7 +29,6 @@
     "about_features",
     "about_story",
     "team_slider",
-    "marquee_strip",
-    "newsletter_footer"
+    "marquee_strip"
   ]
 }

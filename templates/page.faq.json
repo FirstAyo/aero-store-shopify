@@ -12,14 +12,10 @@
       "settings": {
         "heading": "Shipping information"
       }
-    },
-    "newsletter_footer": {
-      "type": "newsletter-footer"
     }
   },
   "order": [
     "hero",
-    "faq_content",
-    "newsletter_footer"
+    "faq_content"
   ]
 }
