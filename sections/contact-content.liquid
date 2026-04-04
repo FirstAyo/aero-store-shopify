@@ -1,0 +1,174 @@
+<section class="contact-content">
+  <div class="page-width">
+    <div class="contact-content__grid">
+      <!-- Left info column -->
+      <div class="contact-content__info">
+        {% if section.settings.heading != blank %}
+          <h2 class="contact-content__heading">{{ section.settings.heading }}</h2>
+        {% endif %}
+
+        {% if section.settings.text != blank %}
+          <div class="contact-content__text">
+            {{ section.settings.text }}
+          </div>
+        {% endif %}
+
+        <div class="contact-content__details">
+          {% if section.settings.phone_label != blank or section.settings.phone_value != blank %}
+            <div class="contact-content__detail">
+              <p class="contact-content__detail-label">{{ section.settings.phone_label }}</p>
+              <p class="contact-content__detail-value">{{ section.settings.phone_value }}</p>
+            </div>
+          {% endif %}
+
+          {% if section.settings.email_label != blank or section.settings.email_value != blank %}
+            <div class="contact-content__detail">
+              <p class="contact-content__detail-label">{{ section.settings.email_label }}</p>
+              <p class="contact-content__detail-value">{{ section.settings.email_value }}</p>
+            </div>
+          {% endif %}
+
+          {% if section.settings.office_label != blank or section.settings.office_value != blank %}
+            <div class="contact-content__detail">
+              <p class="contact-content__detail-label">{{ section.settings.office_label }}</p>
+              <p class="contact-content__detail-value">{{ section.settings.office_value }}</p>
+            </div>
+          {% endif %}
+        </div>
+      </div>
+
+      <!-- Right form column -->
+      <div class="contact-content__form-card">
+        {% if section.settings.form_heading != blank %}
+          <h3 class="contact-content__form-heading">{{ section.settings.form_heading }}</h3>
+        {% endif %}
+
+        {% form 'contact', class: 'contact-content__form' %}
+          {% if form.posted_successfully? %}
+            <p class="contact-content__success">Thanks, your message has been sent.</p>
+          {% endif %}
+
+          {{ form.errors | default_errors }}
+
+          <div class="contact-content__field">
+            <label for="ContactName">Name:</label>
+            <input
+              id="ContactName"
+              type="text"
+              name="contact[name]"
+              value="{{ form.name }}"
+            >
+          </div>
+
+          <div class="contact-content__field">
+            <label for="ContactEmail">Email:</label>
+            <input
+              id="ContactEmail"
+              type="email"
+              name="contact[email]"
+              value="{{ form.email }}"
+            >
+          </div>
+
+          <div class="contact-content__field">
+            <label for="ContactPhone">Phone number:</label>
+            <input
+              id="ContactPhone"
+              type="tel"
+              name="contact[phone]"
+              value="{{ form.phone }}"
+            >
+          </div>
+
+          <div class="contact-content__field">
+            <label for="ContactMessage">Message:</label>
+            <textarea
+              id="ContactMessage"
+              name="contact[body]"
+              rows="4"
+            >{{ form.body }}</textarea>
+          </div>
+
+          <button type="submit" class="contact-content__submit">
+            {{ section.settings.button_label }}
+          </button>
+        {% endform %}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Contact content",
+  "tag": "section",
+  "class": "section-contact-content",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Left heading",
+      "default": "Let’s Collaborate"
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Left text",
+      "default": "<p>The Best electronics products continue to drive innovation we live, work, and interact with our environment opportunities customers to test out products before making a purchase. Innovation, we live, work, and interact with our environment, opportunities</p>"
+    },
+    {
+      "type": "text",
+      "id": "phone_label",
+      "label": "Phone label",
+      "default": "Phone:"
+    },
+    {
+      "type": "text",
+      "id": "phone_value",
+      "label": "Phone value",
+      "default": "+(2) 123-456-789"
+    },
+    {
+      "type": "text",
+      "id": "email_label",
+      "label": "Email label",
+      "default": "Email:"
+    },
+    {
+      "type": "text",
+      "id": "email_value",
+      "label": "Email value",
+      "default": "support@example.com"
+    },
+    {
+      "type": "text",
+      "id": "office_label",
+      "label": "Office label",
+      "default": "Head office"
+    },
+    {
+      "type": "textarea",
+      "id": "office_value",
+      "label": "Office value",
+      "default": "70 Washington Square New York, NY 10012, USA"
+    },
+    {
+      "type": "text",
+      "id": "form_heading",
+      "label": "Form heading",
+      "default": "Say hello"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button label",
+      "default": "Send Now"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Contact content"
+    }
+  ]
+}
+{% endschema %}

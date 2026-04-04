@@ -1,0 +1,38 @@
+{
+  "sections": {
+    "announcement_bar": {
+      "type": "announcement-bar"
+    },
+    "header": {
+      "type": "header"
+    },
+    "hero": {
+      "type": "page-hero-simple",
+      "settings": {
+        "heading": "Contact",
+        "breadcrumb_label": "Contact"
+      }
+    },
+    "contact_content": {
+      "type": "contact-content"
+    },
+    "contact_map": {
+      "type": "contact-map"
+    },
+    "instagram_gallery": {
+      "type": "instagram-gallery"
+    },
+    "newsletter_footer": {
+      "type": "newsletter-footer"
+    }
+  },
+  "order": [
+    "announcement_bar",
+    "header",
+    "hero",
+    "contact_content",
+    "contact_map",
+    "instagram_gallery",
+    "newsletter_footer"
+  ]
+}

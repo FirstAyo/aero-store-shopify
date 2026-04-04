@@ -1,0 +1,42 @@
+<section class="page-hero-simple">
+  <div class="page-width">
+    <div class="page-hero-simple__box">
+      {% if section.settings.heading != blank %}
+        <h1 class="page-hero-simple__heading">{{ section.settings.heading }}</h1>
+      {% endif %}
+
+      <div class="page-hero-simple__breadcrumb">
+        <a href="{{ routes.root_url }}">Home</a>
+        <span>/</span>
+        <span>{{ section.settings.breadcrumb_label }}</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Simple page hero",
+  "tag": "section",
+  "class": "section-page-hero-simple",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Contact"
+    },
+    {
+      "type": "text",
+      "id": "breadcrumb_label",
+      "label": "Breadcrumb label",
+      "default": "Contact"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Simple page hero"
+    }
+  ]
+}
+{% endschema %}
