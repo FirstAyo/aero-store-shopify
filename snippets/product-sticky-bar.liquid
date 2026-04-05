@@ -1,0 +1,79 @@
+{%- comment -%}
+  Sticky product bar
+  - Shows after scrolling
+  - Uses real selected variant id in the same product form pattern
+  - JS will keep title / option summary / price / quantity in sync
+{%- endcomment -%}
+
+<div
+  class="product-sticky-bar"
+  data-product-sticky-bar
+  hidden
+>
+  <div class="page-width">
+    <div class="product-sticky-bar__inner">
+      <div class="product-sticky-bar__left">
+        <div class="product-sticky-bar__thumb-wrap">
+          {%- assign sticky_media = product.selected_or_first_available_variant.featured_media | default: product.featured_media -%}
+          {% if sticky_media %}
+            {{
+              sticky_media
+              | image_url: width: 180
+              | image_tag:
+                class: 'product-sticky-bar__thumb',
+                loading: 'lazy',
+                alt: product.title
+            }}
+          {% endif %}
+        </div>
+
+        <div class="product-sticky-bar__meta">
+          <h3 class="product-sticky-bar__title" data-sticky-title>
+            {{ product.title }}
+          </h3>
+
+          <p class="product-sticky-bar__variant" data-sticky-variant-summary>
+            {{ product.selected_or_first_available_variant.title }} - {{ product.selected_or_first_available_variant.price | money }}
+          </p>
+        </div>
+      </div>
+
+      {% form 'product', product, class: 'product-sticky-bar__form', data-sticky-product-form: '' %}
+        <input
+          type="hidden"
+          name="id"
+          value="{{ product.selected_or_first_available_variant.id }}"
+          data-sticky-variant-id
+        >
+
+        <div class="quantity-selector quantity-selector--sticky">
+          <button type="button" class="quantity-selector__btn" data-sticky-qty-minus aria-label="Decrease quantity">−</button>
+          <input
+            type="number"
+            name="quantity"
+            value="1"
+            min="1"
+            class="quantity-selector__input"
+            data-sticky-qty-input
+          >
+          <button type="button" class="quantity-selector__btn" data-sticky-qty-plus aria-label="Increase quantity">+</button>
+        </div>
+
+        <button
+          type="submit"
+          class="product-sticky-bar__add"
+          data-sticky-add-to-cart
+          {% unless product.selected_or_first_available_variant.available %}disabled{% endunless %}
+        >
+          {% if product.selected_or_first_available_variant.available %}
+            Add To Cart
+          {% else %}
+            Sold Out
+          {% endif %}
+        </button>
+
+        {{ form | payment_button }}
+      {% endform %}
+    </div>
+  </div>
+</div>

@@ -1,0 +1,320 @@
+<section
+  class="main-product-detail"
+  data-product-section
+  data-product-id="{{ product.id }}"
+>
+  <div class="page-width">
+    <div class="main-product-detail__grid">
+      <!-- Product media -->
+      <div class="main-product-detail__media-column">
+        <div class="main-product-detail__media-main">
+          {% if product.selected_or_first_available_variant.featured_media %}
+            {% assign active_media = product.selected_or_first_available_variant.featured_media %}
+          {% else %}
+            {% assign active_media = product.featured_media %}
+          {% endif %}
+
+          <div class="product-media-main" data-product-main-media>
+            {% if active_media %}
+              {{
+                active_media
+                | image_url: width: 1600
+                | image_tag: class: 'product-media-main__image', loading: 'eager', alt: product.title
+              }}
+            {% endif %}
+          </div>
+        </div>
+
+        {% if product.media.size > 1 %}
+          <div class="main-product-detail__thumbnails" data-product-thumbnails>
+            {% for media in product.media %}
+              <button
+                type="button"
+                class="product-thumbnail {% if active_media and media.id == active_media.id %}is-active{% endif %}"
+                data-media-thumb
+                data-media-id="{{ media.id }}"
+                data-media-src="{{ media | image_url: width: 1600 }}"
+                aria-label="Show media {{ forloop.index }}"
+              >
+                {{
+                  media
+                  | image_url: width: 240
+                  | image_tag: class: 'product-thumbnail__image', loading: 'lazy', alt: product.title
+                }}
+              </button>
+            {% endfor %}
+          </div>
+        {% endif %}
+      </div>
+
+      <!-- Product info -->
+      <div class="main-product-detail__info-column">
+        <div class="product-info" data-product-info>
+          <h1 class="product-info__title">{{ product.title }}</h1>
+
+          <div class="product-info__price-row" data-product-price-wrap>
+            <span class="product-info__price" data-product-price>
+              {{ product.selected_or_first_available_variant.price | money }}
+            </span>
+
+            {% if product.selected_or_first_available_variant.compare_at_price
+                > product.selected_or_first_available_variant.price
+            %}
+              <span class="product-info__compare-price" data-product-compare-price>
+                {{ product.selected_or_first_available_variant.compare_at_price | money }}
+              </span>
+              <span class="product-info__sale-badge">SALE</span>
+
+              {% assign compare_price = product.selected_or_first_available_variant.compare_at_price %}
+              {% assign price = product.selected_or_first_available_variant.price %}
+              {% assign savings = compare_price | minus: price | times: 100 | divided_by: compare_price %}
+              <span class="product-info__discount-badge" data-product-discount> -{{ savings }}% </span>
+            {% else %}
+              <span class="product-info__compare-price" data-product-compare-price hidden></span>
+              <span class="product-info__sale-badge" hidden>SALE</span>
+              <span class="product-info__discount-badge" data-product-discount hidden></span>
+            {% endif %}
+          </div>
+
+          <div class="product-info__rating-row">
+            <span class="product-info__stars">★★★★★</span>
+            <span class="product-info__review-count">(2)</span>
+          </div>
+
+          {% if product.vendor != blank %}
+            <p class="product-info__meta">
+              <strong>Vendor:</strong>
+              <span data-product-vendor>{{ product.vendor }}</span>
+            </p>
+          {% endif %}
+
+          {% form 'product', product, class: 'product-form', data-product-form: '' %}
+            <input
+              type="hidden"
+              name="id"
+              value="{{ product.selected_or_first_available_variant.id }}"
+              data-variant-id-input
+            >
+
+            {% for option in product.options_with_values %}
+              <div class="product-option" data-product-option-group>
+                <div class="product-option__header">
+                  <span class="product-option__label">{{ option.name }}:</span>
+                  <span class="product-option__selected" data-option-selected>
+                    {{ option.selected_value }}
+                  </span>
+                </div>
+
+                <div class="product-option__values">
+                  {% for value in option.values %}
+                    <button
+                      type="button"
+                      class="product-option__value {% if option.selected_value == value %}is-active{% endif %}"
+                      data-option-value
+                      data-option-name="{{ option.name | escape }}"
+                      data-option-value-text="{{ value | escape }}"
+                    >
+                      {{ value }}
+                    </button>
+                  {% endfor %}
+                </div>
+              </div>
+            {% endfor %}
+
+            <div class="product-info__quantity-row">
+              <label class="product-info__quantity-label">Quantity</label>
+
+              <div class="product-info__purchase-row">
+                <div class="quantity-selector">
+                  <button type="button" class="quantity-selector__btn" data-qty-minus aria-label="Decrease quantity">
+                    −
+                  </button>
+                  <input
+                    type="number"
+                    name="quantity"
+                    value="1"
+                    min="1"
+                    class="quantity-selector__input"
+                    data-qty-input
+                  >
+                  <button type="button" class="quantity-selector__btn" data-qty-plus aria-label="Increase quantity">
+                    +
+                  </button>
+                </div>
+
+                <button
+                  type="submit"
+                  class="product-form__add-to-cart"
+                  data-add-to-cart-btn
+                  {% unless product.selected_or_first_available_variant.available %}
+                    disabled
+                  {% endunless %}
+                >
+                  {% if product.selected_or_first_available_variant.available %}
+                    Add To Cart
+                  {% else %}
+                    Sold Out
+                  {% endif %}
+                </button>
+              </div>
+            </div>
+
+            <div class="product-form__buy-now">
+              {{ form | payment_button }}
+            </div>
+          {% endform %}
+
+          <div class="product-info__guarantee">Guaranteed safe checkout</div>
+
+          <div class="product-info__payments">
+            <span class="product-info__payment-chip">VISA</span>
+            <span class="product-info__payment-chip">MC</span>
+            <span class="product-info__payment-chip">AMEX</span>
+            <span class="product-info__payment-chip">PP</span>
+            <span class="product-info__payment-chip">DISC</span>
+          </div>
+
+          <div class="product-accordion">
+            <details class="product-accordion__item" open>
+              <summary class="product-accordion__summary">
+                <span>Description</span>
+                <span>⌄</span>
+              </summary>
+              <div class="product-accordion__content">
+                {{ product.description }}
+              </div>
+            </details>
+
+            <details class="product-accordion__item">
+              <summary class="product-accordion__summary">
+                <span>Terms and conditions</span>
+                <span>⌄</span>
+              </summary>
+              <div class="product-accordion__content">
+                <p>
+                  All orders are subject to product availability, order verification, and store policy. Please review
+                  shipping, returns, and warranty details before purchase.
+                </p>
+              </div>
+            </details>
+          </div>
+
+          <div class="product-share">
+            <a
+              href="https://www.facebook.com/sharer/sharer.php?u={{ shop.url }}{{ product.url }}"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="product-share__link"
+              >Facebook</a
+            >
+            <a
+              href="https://twitter.com/intent/tweet?url={{ shop.url }}{{ product.url }}&text={{ product.title | url_encode }}"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="product-share__link"
+              >Twitter</a
+            >
+            <a
+              href="https://pinterest.com/pin/create/button/?url={{ shop.url }}{{ product.url }}&description={{ product.title | url_encode }}"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="product-share__link"
+              >Pin it</a
+            >
+            <button type="button" class="product-share__link" data-share-more>Share more</button>
+          </div>
+
+          <div class="product-links">
+            <a href="#" class="product-links__link">Size Guide</a>
+            <button
+              type="button"
+              class="product-links__link product-links__button"
+              data-product-inquiry-open
+              data-product-title="{{ product.title | escape }}"
+              data-product-url="{{ shop.url }}{{ product.url }}"
+            >
+              Ask About This product
+            </button>
+          </div>
+
+          <div class="product-reviews-placeholder">
+            <h3 class="product-reviews-placeholder__heading">Customer Reviews</h3>
+
+            <div class="product-reviews-placeholder__summary">
+              <div class="product-reviews-placeholder__stars">★★★★★</div>
+              <div class="product-reviews-placeholder__score">5.00 out of 5</div>
+            </div>
+
+            <div class="product-reviews-placeholder__bars">
+              <div class="product-reviews-placeholder__bar-row">
+                <span>★★★★★</span>
+                <div class="bar"><span style="width: 80%;"></span></div>
+                <span>2</span>
+              </div>
+              <div class="product-reviews-placeholder__bar-row">
+                <span>★★★★☆</span>
+                <div class="bar"><span style="width: 0%;"></span></div>
+                <span>0</span>
+              </div>
+              <div class="product-reviews-placeholder__bar-row">
+                <span>★★★☆☆</span>
+                <div class="bar"><span style="width: 0%;"></span></div>
+                <span>0</span>
+              </div>
+              <div class="product-reviews-placeholder__bar-row">
+                <span>★★☆☆☆</span>
+                <div class="bar"><span style="width: 0%;"></span></div>
+                <span>0</span>
+              </div>
+              <div class="product-reviews-placeholder__bar-row">
+                <span>★☆☆☆☆</span>
+                <div class="bar"><span style="width: 0%;"></span></div>
+                <span>0</span>
+              </div>
+            </div>
+
+            <button type="button" class="product-reviews-placeholder__write-btn">Write a review</button>
+
+            <div class="product-reviews-placeholder__list">
+              <article class="product-reviews-placeholder__item">
+                <div class="product-reviews-placeholder__item-top">
+                  <span>★★★★★</span>
+                  <span>10/30/2025</span>
+                </div>
+                <p class="product-reviews-placeholder__author">J.p</p>
+                <p class="product-reviews-placeholder__title">Product Quality!</p>
+                <p class="product-reviews-placeholder__body">Nice product!</p>
+              </article>
+
+              <article class="product-reviews-placeholder__item">
+                <div class="product-reviews-placeholder__item-top">
+                  <span>★★★★★</span>
+                  <span>08/15/2024</span>
+                </div>
+                <p class="product-reviews-placeholder__author">Z.K.</p>
+                <p class="product-reviews-placeholder__title">wswb h</p>
+                <p class="product-reviews-placeholder__body">enfnefenf</p>
+              </article>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script type="application/json" data-product-json>
+    {{ product | json }}
+  </script>
+
+  {% render 'product-inquiry-modal' %}
+  {% render 'product-sticky-bar', product: product %}
+
+  {% schema %}
+{
+  "name": "Main product detail",
+  "tag": "section",
+  "class": "section-main-product-detail",
+  "settings": []
+}
+  {% endschema %}
+</section>

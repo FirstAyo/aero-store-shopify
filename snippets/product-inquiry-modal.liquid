@@ -1,0 +1,38 @@
+<div class="product-inquiry-modal" data-product-inquiry-modal hidden>
+  <div class="product-inquiry-modal__overlay" data-product-inquiry-close></div>
+
+  <div class="product-inquiry-modal__panel">
+    <div class="product-inquiry-modal__header">
+      <h3 class="product-inquiry-modal__title">Have a question?</h3>
+      <button
+        type="button"
+        class="product-inquiry-modal__close"
+        data-product-inquiry-close
+        aria-label="Close inquiry form"
+      >
+        ×
+      </button>
+    </div>
+
+    {% form 'contact', class: 'product-inquiry-modal__form' %}
+      <div class="product-inquiry-modal__row">
+        <input type="text" name="contact[name]" placeholder="Name *" required>
+        <input type="email" name="contact[email]" placeholder="Email *" required>
+      </div>
+
+      <div class="product-inquiry-modal__row product-inquiry-modal__row--single">
+        <input type="tel" name="contact[phone]" placeholder="Phone *" required>
+      </div>
+
+      <div class="product-inquiry-modal__row product-inquiry-modal__row--single">
+        <input type="text" name="contact[product_url]" placeholder="Product URL" data-product-inquiry-url readonly>
+      </div>
+
+      <div class="product-inquiry-modal__row product-inquiry-modal__row--single">
+        <textarea name="contact[body]" rows="6" placeholder="Write Message *" required></textarea>
+      </div>
+
+      <button type="submit" class="product-inquiry-modal__submit">Send</button>
+    {% endform %}
+  </div>
+</div>
