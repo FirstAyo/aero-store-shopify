@@ -3,6 +3,7 @@
    - AJAX add / update / remove
    - Header count sync
    - Opens from cart icon and add-to-cart
+   - Includes note + shipping mini panels
 ========================= */
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -13,6 +14,17 @@ document.addEventListener("DOMContentLoaded", () => {
   const drawerSubtotal = drawer.querySelector("[data-cart-drawer-subtotal]");
   const closeButtons = drawer.querySelectorAll("[data-cart-drawer-close]");
   const cartCountEls = document.querySelectorAll("[data-cart-count]");
+
+  const noteToggle = drawer.querySelector("[data-cart-note-toggle]");
+  const shippingToggle = drawer.querySelector("[data-cart-shipping-toggle]");
+  const notePanel = drawer.querySelector("[data-cart-note-panel]");
+  const shippingPanel = drawer.querySelector("[data-cart-shipping-panel]");
+  const noteInput = drawer.querySelector("[data-cart-note-input]");
+  const noteSaveBtn = drawer.querySelector("[data-cart-note-save]");
+  const shippingCalcBtn = drawer.querySelector("[data-cart-shipping-calc]");
+  const shippingCountry = drawer.querySelector("[data-cart-shipping-country]");
+  const shippingZip = drawer.querySelector("[data-cart-shipping-zip]");
+  const shippingResult = drawer.querySelector("[data-cart-shipping-result]");
 
   const formatMoney = (cents) => {
     const value = Number(cents || 0) / 100;
@@ -32,8 +44,18 @@ document.addEventListener("DOMContentLoaded", () => {
     document.body.classList.remove("overflow-hidden");
   };
 
+  const closeMetaPanels = () => {
+    if (notePanel) notePanel.hidden = true;
+    if (shippingPanel) shippingPanel.hidden = true;
+    if (noteToggle) noteToggle.setAttribute("aria-expanded", "false");
+    if (shippingToggle) shippingToggle.setAttribute("aria-expanded", "false");
+  };
+
   closeButtons.forEach((button) => {
-    button.addEventListener("click", closeDrawer);
+    button.addEventListener("click", () => {
+      closeMetaPanels();
+      closeDrawer();
+    });
   });
 
   document.querySelectorAll("[data-cart-open]").forEach((button) => {
@@ -42,6 +64,28 @@ document.addEventListener("DOMContentLoaded", () => {
       refreshDrawer(true);
     });
   });
+
+  if (noteToggle) {
+    noteToggle.addEventListener("click", () => {
+      const isOpen = noteToggle.getAttribute("aria-expanded") === "true";
+      if (shippingPanel) shippingPanel.hidden = true;
+      if (shippingToggle) shippingToggle.setAttribute("aria-expanded", "false");
+
+      if (notePanel) notePanel.hidden = isOpen;
+      noteToggle.setAttribute("aria-expanded", String(!isOpen));
+    });
+  }
+
+  if (shippingToggle) {
+    shippingToggle.addEventListener("click", () => {
+      const isOpen = shippingToggle.getAttribute("aria-expanded") === "true";
+      if (notePanel) notePanel.hidden = true;
+      if (noteToggle) noteToggle.setAttribute("aria-expanded", "false");
+
+      if (shippingPanel) shippingPanel.hidden = isOpen;
+      shippingToggle.setAttribute("aria-expanded", String(!isOpen));
+    });
+  }
 
   const updateHeaderCount = (cart) => {
     cartCountEls.forEach((el) => {
@@ -117,6 +161,10 @@ document.addEventListener("DOMContentLoaded", () => {
       drawerSubtotal.textContent = formatMoney(cart.total_price);
     }
 
+    if (noteInput) {
+      noteInput.value = cart.note || "";
+    }
+
     bindLineEvents();
   };
 
@@ -155,6 +203,17 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     if (!response.ok) throw new Error("Failed to add item");
+    return response.json();
+  };
+
+  const saveCartNote = async (note) => {
+    const response = await fetch("/cart/update.js", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ note }),
+    });
+
+    if (!response.ok) throw new Error("Failed to save note");
     return response.json();
   };
 
@@ -216,6 +275,33 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   };
 
+  if (noteSaveBtn && noteInput) {
+    noteSaveBtn.addEventListener("click", async () => {
+      try {
+        await saveCartNote(noteInput.value);
+        await refreshDrawer(false);
+      } catch (error) {
+        console.error(error);
+      }
+    });
+  }
+
+  if (shippingCalcBtn && shippingCountry && shippingZip && shippingResult) {
+    shippingCalcBtn.addEventListener("click", () => {
+      const country = shippingCountry.value.trim();
+      const zip = shippingZip.value.trim();
+
+      shippingResult.hidden = false;
+
+      if (!country || !zip) {
+        shippingResult.textContent = "Enter a country and postal / ZIP code.";
+        return;
+      }
+
+      shippingResult.textContent = `Estimated shipping to ${country} (${zip}) will be calculated at checkout.`;
+    });
+  }
+
   /* Product forms -> AJAX add -> open drawer */
   document
     .querySelectorAll("[data-product-form], [data-sticky-product-form]")
@@ -241,93 +327,93 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
   refreshDrawer(false);
+});
 
-  /* =========================
+/* =========================
    Cart page quantity logic
 ========================= */
 
-  document.addEventListener("DOMContentLoaded", () => {
-    const cartPageMinusButtons = document.querySelectorAll(
-      "[data-cart-page-minus]",
-    );
-    const cartPagePlusButtons = document.querySelectorAll(
-      "[data-cart-page-plus]",
-    );
-    const cartPageRemoveButtons = document.querySelectorAll(
-      "[data-cart-page-remove]",
-    );
+document.addEventListener("DOMContentLoaded", () => {
+  const cartPageMinusButtons = document.querySelectorAll(
+    "[data-cart-page-minus]",
+  );
+  const cartPagePlusButtons = document.querySelectorAll(
+    "[data-cart-page-plus]",
+  );
+  const cartPageRemoveButtons = document.querySelectorAll(
+    "[data-cart-page-remove]",
+  );
 
-    if (
-      !cartPageMinusButtons.length &&
-      !cartPagePlusButtons.length &&
-      !cartPageRemoveButtons.length
-    )
-      return;
+  if (
+    !cartPageMinusButtons.length &&
+    !cartPagePlusButtons.length &&
+    !cartPageRemoveButtons.length
+  )
+    return;
 
-    const updateCartPageLine = async (line, quantity) => {
-      const response = await fetch("/cart/change.js", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          line: Number(line),
-          quantity: Number(quantity),
-        }),
+  const updateCartPageLine = async (line, quantity) => {
+    const response = await fetch("/cart/change.js", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        line: Number(line),
+        quantity: Number(quantity),
+      }),
+    });
+
+    if (!response.ok) throw new Error("Failed to update cart");
+    return response.json();
+  };
+
+  const bindCartPageEvents = () => {
+    cartPageMinusButtons.forEach((button) => {
+      button.addEventListener("click", async () => {
+        const line = button.getAttribute("data-line-index");
+        const input = document.querySelector(
+          `[data-cart-page-qty][data-line-index="${line}"]`,
+        );
+        const currentQty = Number(input?.value || 1);
+        const nextQty = Math.max(0, currentQty - 1);
+
+        try {
+          await updateCartPageLine(line, nextQty);
+          window.location.reload();
+        } catch (error) {
+          console.error(error);
+        }
       });
+    });
 
-      if (!response.ok) throw new Error("Failed to update cart");
-      return response.json();
-    };
+    cartPagePlusButtons.forEach((button) => {
+      button.addEventListener("click", async () => {
+        const line = button.getAttribute("data-line-index");
+        const input = document.querySelector(
+          `[data-cart-page-qty][data-line-index="${line}"]`,
+        );
+        const currentQty = Number(input?.value || 1);
 
-    const bindCartPageEvents = () => {
-      cartPageMinusButtons.forEach((button) => {
-        button.addEventListener("click", async () => {
-          const line = button.getAttribute("data-line-index");
-          const input = document.querySelector(
-            `[data-cart-page-qty][data-line-index="${line}"]`,
-          );
-          const currentQty = Number(input?.value || 1);
-          const nextQty = Math.max(0, currentQty - 1);
-
-          try {
-            await updateCartPageLine(line, nextQty);
-            window.location.reload();
-          } catch (error) {
-            console.error(error);
-          }
-        });
+        try {
+          await updateCartPageLine(line, currentQty + 1);
+          window.location.reload();
+        } catch (error) {
+          console.error(error);
+        }
       });
+    });
 
-      cartPagePlusButtons.forEach((button) => {
-        button.addEventListener("click", async () => {
-          const line = button.getAttribute("data-line-index");
-          const input = document.querySelector(
-            `[data-cart-page-qty][data-line-index="${line}"]`,
-          );
-          const currentQty = Number(input?.value || 1);
+    cartPageRemoveButtons.forEach((button) => {
+      button.addEventListener("click", async () => {
+        const line = button.getAttribute("data-line-index");
 
-          try {
-            await updateCartPageLine(line, currentQty + 1);
-            window.location.reload();
-          } catch (error) {
-            console.error(error);
-          }
-        });
+        try {
+          await updateCartPageLine(line, 0);
+          window.location.reload();
+        } catch (error) {
+          console.error(error);
+        }
       });
+    });
+  };
 
-      cartPageRemoveButtons.forEach((button) => {
-        button.addEventListener("click", async () => {
-          const line = button.getAttribute("data-line-index");
-
-          try {
-            await updateCartPageLine(line, 0);
-            window.location.reload();
-          } catch (error) {
-            console.error(error);
-          }
-        });
-      });
-    };
-
-    bindCartPageEvents();
-  });
+  bindCartPageEvents();
 });

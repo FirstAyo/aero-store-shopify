@@ -3,6 +3,7 @@
   - Opens from header cart icon
   - Opens after add-to-cart
   - Uses AJAX cart endpoints
+  - Includes expandable note + shipping panels
 {%- endcomment -%}
 
 <div class="cart-drawer" data-cart-drawer hidden>
@@ -33,11 +34,67 @@
 
     <div class="cart-drawer__footer">
       <div class="cart-drawer__meta">
-        <button type="button" class="cart-drawer__meta-link">✎ Note</button>
+        <button
+          type="button"
+          class="cart-drawer__meta-link"
+          data-cart-note-toggle
+          aria-expanded="false"
+        >
+          ✎ Note
+        </button>
 
         <span class="cart-drawer__meta-divider"></span>
 
-        <button type="button" class="cart-drawer__meta-link">🚚 Shipping</button>
+        <button
+          type="button"
+          class="cart-drawer__meta-link"
+          data-cart-shipping-toggle
+          aria-expanded="false"
+        >
+          🚚 Shipping
+        </button>
+      </div>
+
+      <!-- Note panel -->
+      <div class="cart-drawer__panel-box" data-cart-note-panel hidden>
+        <label for="CartDrawerNote" class="cart-drawer__panel-label"> Order note </label>
+
+        <textarea
+          id="CartDrawerNote"
+          class="cart-drawer__note-input"
+          data-cart-note-input
+          rows="4"
+          placeholder="Add a note to your order"
+        ></textarea>
+
+        <div class="cart-drawer__panel-actions">
+          <button type="button" class="cart-drawer__panel-btn" data-cart-note-save>Save note</button>
+        </div>
+      </div>
+
+      <!-- Shipping panel -->
+      <div class="cart-drawer__panel-box" data-cart-shipping-panel hidden>
+        <label class="cart-drawer__panel-label">Estimate shipping</label>
+
+        <div class="cart-drawer__shipping-fields">
+          <select class="cart-drawer__shipping-select" data-cart-shipping-country>
+            <option value="">Country</option>
+            <option value="Canada">Canada</option>
+            <option value="United States">United States</option>
+            <option value="United Kingdom">United Kingdom</option>
+          </select>
+
+          <input
+            type="text"
+            class="cart-drawer__shipping-input"
+            data-cart-shipping-zip
+            placeholder="Postal / ZIP code"
+          >
+
+          <button type="button" class="cart-drawer__panel-btn" data-cart-shipping-calc>Calculate</button>
+        </div>
+
+        <p class="cart-drawer__shipping-result" data-cart-shipping-result hidden></p>
       </div>
 
       <div class="cart-drawer__subtotal-row">

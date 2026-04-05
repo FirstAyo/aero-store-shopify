@@ -5527,3 +5527,72 @@
     font-size: 22px;
   }
 }
+
+/* =========================
+   Cart drawer expandable panels
+========================= */
+
+.cart-drawer__panel-box {
+  margin-bottom: 16px;
+  padding: 14px;
+  border: 1px solid rgba(17, 17, 17, 0.08);
+  background: #fafafa;
+}
+
+.cart-drawer__panel-label {
+  display: block;
+  margin-bottom: 10px;
+  font-size: 14px;
+  font-weight: 700;
+  color: #111;
+}
+
+.cart-drawer__note-input {
+  width: 100%;
+  min-height: 100px;
+  padding: 12px;
+  border: 1px solid rgba(17, 17, 17, 0.14);
+  background: #fff;
+  resize: vertical;
+  font: inherit;
+  outline: none;
+}
+
+.cart-drawer__panel-actions {
+  margin-top: 12px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.cart-drawer__panel-btn {
+  min-height: 40px;
+  padding: 0 16px;
+  border: 1px solid #111;
+  background: #111;
+  color: #fff;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.cart-drawer__shipping-fields {
+  display: grid;
+  gap: 10px;
+}
+
+.cart-drawer__shipping-select,
+.cart-drawer__shipping-input {
+  width: 100%;
+  min-height: 42px;
+  padding: 0 12px;
+  border: 1px solid rgba(17, 17, 17, 0.14);
+  background: #fff;
+  font: inherit;
+  outline: none;
+}
+
+.cart-drawer__shipping-result {
+  margin: 12px 0 0;
+  color: rgba(17, 17, 17, 0.72);
+  font-size: 14px;
+  line-height: 1.5;
+}
