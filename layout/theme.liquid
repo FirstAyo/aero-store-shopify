@@ -29,6 +29,7 @@
     <script src="{{ 'collection.js' | asset_url }}" defer></script>
     <script src="{{ 'product.js' | asset_url }}" defer></script>
     <script src="{{ 'product-recommendations.js' | asset_url }}" defer></script>
+    <script src="{{ 'cart.js' | asset_url }}" defer></script>
   </head>
 
   <body>
@@ -40,6 +41,7 @@
       {{ content_for_layout }}
     </main>
 
+    {% render 'cart-drawer' %}
     {% sections 'footer-group' %}
   </body>
 </html>

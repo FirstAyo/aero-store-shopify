@@ -73,10 +73,23 @@
           {% endif %}
 
           {% if section.settings.show_cart %}
-            <a href="{{ routes.cart_url }}" class="site-header__icon-link site-header__cart-link">
+            <a
+              href="{{ routes.cart_url }}"
+              class="site-header__icon-link site-header__cart-link"
+              data-cart-open
+              aria-label="Open cart"
+            >
               {% render 'icon', icon: 'cart' %}
               <span class="visually-hidden">Cart</span>
-              <span class="site-header__cart-count">{{ cart.item_count }}</span>
+              <span
+                class="site-header__cart-count"
+                data-cart-count
+                {% if cart.item_count < 1 %}
+                  hidden
+                {% endif %}
+              >
+                {{ cart.item_count }}
+              </span>
             </a>
           {% endif %}
         </div>

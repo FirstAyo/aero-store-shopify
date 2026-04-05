@@ -1,0 +1,164 @@
+<section class="main-cart">
+  <div class="page-width">
+    <div class="main-cart__breadcrumb">
+      <a href="{{ routes.root_url }}">Home</a>
+      <span>/</span>
+      <span>Your Shopping Cart</span>
+    </div>
+
+    {% if cart.item_count > 0 %}
+      <form action="{{ routes.cart_url }}" method="post" novalidate class="main-cart__form">
+        <div class="main-cart__table-wrap">
+          <div class="main-cart__table-head">
+            <div class="main-cart__col main-cart__col--product">Product</div>
+            <div class="main-cart__col main-cart__col--quantity">Quantity</div>
+            <div class="main-cart__col main-cart__col--total">Total</div>
+          </div>
+
+          <div class="main-cart__items">
+            {% for item in cart.items %}
+              <div class="main-cart__item" data-cart-line-index="{{ forloop.index }}">
+                <div class="main-cart__item-product">
+                  <a href="{{ item.url }}" class="main-cart__item-image-wrap">
+                    {% if item.image %}
+                      {{
+                        item.image
+                        | image_url: width: 320
+                        | image_tag: class: 'main-cart__item-image', loading: 'lazy', alt: item.product.title
+                      }}
+                    {% endif %}
+                  </a>
+
+                  <div class="main-cart__item-details">
+                    {% if item.vendor != blank %}
+                      <p class="main-cart__item-vendor">{{ item.vendor }}</p>
+                    {% endif %}
+
+                    <h2 class="main-cart__item-title">
+                      <a href="{{ item.url }}">{{ item.product.title }}</a>
+                    </h2>
+
+                    {% if item.product.has_only_default_variant == false %}
+                      <div class="main-cart__item-options">
+                        {% for option in item.options_with_values %}
+                          <p>{{ option.name }}:{{ option.value }}</p>
+                        {% endfor %}
+                      </div>
+                    {% endif %}
+                  </div>
+                </div>
+
+                <div class="main-cart__item-quantity">
+                  <div class="main-cart__qty">
+                    <button
+                      type="button"
+                      class="main-cart__qty-btn"
+                      data-cart-page-minus
+                      data-line-index="{{ forloop.index }}"
+                      aria-label="Decrease quantity"
+                    >
+                      −
+                    </button>
+
+                    <input
+                      class="main-cart__qty-input"
+                      type="number"
+                      name="updates[]"
+                      value="{{ item.quantity }}"
+                      min="0"
+                      data-cart-page-qty
+                      data-line-index="{{ forloop.index }}"
+                    >
+
+                    <button
+                      type="button"
+                      class="main-cart__qty-btn"
+                      data-cart-page-plus
+                      data-line-index="{{ forloop.index }}"
+                      aria-label="Increase quantity"
+                    >
+                      +
+                    </button>
+                  </div>
+
+                  <button
+                    type="button"
+                    class="main-cart__remove"
+                    data-cart-page-remove
+                    data-line-index="{{ forloop.index }}"
+                    aria-label="Remove item"
+                  >
+                    🗑
+                  </button>
+                </div>
+
+                <div class="main-cart__item-total">
+                  {{ item.final_line_price | money }}
+                </div>
+              </div>
+            {% endfor %}
+          </div>
+        </div>
+
+        <div class="main-cart__bottom">
+          <div class="main-cart__bottom-left">
+            <div class="main-cart__note">
+              <label for="CartNote" class="main-cart__section-label"> Order special instructions </label>
+              <textarea
+                id="CartNote"
+                name="note"
+                class="main-cart__note-input"
+              >{{ cart.note }}</textarea>
+            </div>
+
+            <div class="main-cart__shipping">
+              <div class="main-cart__shipping-head">
+                <label class="main-cart__section-label"> Estimate shipping rates </label>
+                <span class="main-cart__shipping-info">ⓘ</span>
+              </div>
+
+              <div class="main-cart__shipping-fields">
+                <select class="main-cart__shipping-select">
+                  <option>---</option>
+                  <option>Canada</option>
+                  <option>United States</option>
+                  <option>United Kingdom</option>
+                </select>
+
+                <input
+                  type="text"
+                  class="main-cart__shipping-input"
+                  placeholder="Postal/ZIP code"
+                >
+
+                <button type="button" class="main-cart__shipping-btn">Calculate</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="main-cart__summary">
+            <div class="main-cart__summary-row">
+              <span class="main-cart__summary-label">Subtotal</span>
+              <span class="main-cart__summary-value">{{ cart.total_price | money }}</span>
+            </div>
+
+            <p class="main-cart__summary-text">Taxes and shipping calculated at checkout</p>
+
+            <button
+              type="submit"
+              name="checkout"
+              class="main-cart__checkout"
+            >
+              Check Out
+            </button>
+          </div>
+        </div>
+      </form>
+    {% else %}
+      <div class="main-cart__empty">
+        <h1 class="main-cart__empty-title">Your cart is empty</h1>
+        <a href="{{ routes.all_products_collection_url }}" class="main-cart__empty-link"> Continue shopping </a>
+      </div>
+    {% endif %}
+  </div>
+</section>
