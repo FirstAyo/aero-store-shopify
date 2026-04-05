@@ -1,0 +1,130 @@
+<section
+  class="product-recommendations-custom"
+  data-product-recommendations-section
+  data-product-id="{{ product.id }}"
+  data-limit="{{ section.settings.products_to_show }}"
+>
+  <div class="page-width">
+    <div
+      class="product-recommendations-custom__content"
+      data-recommendations-root
+      data-url="{{ routes.product_recommendations_url }}?section_id={{ section.id }}&product_id={{ product.id }}&limit={{ section.settings.products_to_show }}"
+    >
+      {% if recommendations.performed and recommendations.products_count > 0 %}
+        <div class="product-recommendations-custom__header">
+          <h2 class="product-recommendations-custom__heading">
+            {{ section.settings.heading }}
+          </h2>
+        </div>
+
+        <div class="product-recommendations-custom__slider" data-recommendations-slider>
+          <button
+            type="button"
+            class="product-recommendations-custom__arrow product-recommendations-custom__arrow--prev"
+            data-recommendations-prev
+            aria-label="Previous recommended products"
+          >
+            {% render 'icon', icon: 'arrow-left' %}
+          </button>
+
+          <div class="product-recommendations-custom__viewport" data-recommendations-viewport>
+            <div class="product-recommendations-custom__track" data-recommendations-track>
+              {% for recommendation in recommendations.products %}
+                <article class="recommended-product-card">
+                  <a href="{{ recommendation.url }}" class="recommended-product-card__media">
+                    {% if recommendation.compare_at_price_max > recommendation.price %}
+                      <span class="recommended-product-card__badge">SALE</span>
+                    {% endif %}
+
+                    {% if recommendation.featured_image != blank %}
+                      {{
+                        recommendation.featured_image
+                        | image_url: width: 900
+                        | image_tag:
+                          class: 'recommended-product-card__image',
+                          loading: 'lazy',
+                          alt: recommendation.title
+                      }}
+                    {% endif %}
+                  </a>
+
+                  <div class="recommended-product-card__content">
+                    <h3 class="recommended-product-card__title">
+                      <a href="{{ recommendation.url }}">{{ recommendation.title }}</a>
+                    </h3>
+
+                    <div class="recommended-product-card__price">
+                      {% if recommendation.compare_at_price_max > recommendation.price %}
+                        <span class="recommended-product-card__price-current">
+                          {{ recommendation.price | money }}
+                        </span>
+                        <span class="recommended-product-card__price-compare">
+                          {{ recommendation.compare_at_price_max | money }}
+                        </span>
+                      {% else %}
+                        {% if recommendation.price_varies %}
+                          <span class="recommended-product-card__price-current">
+                            From {{ recommendation.price_min | money }}
+                          </span>
+                        {% else %}
+                          <span class="recommended-product-card__price-current">
+                            {{ recommendation.price | money }}
+                          </span>
+                        {% endif %}
+                      {% endif %}
+                    </div>
+                  </div>
+                </article>
+              {% endfor %}
+            </div>
+          </div>
+
+          <button
+            type="button"
+            class="product-recommendations-custom__arrow product-recommendations-custom__arrow--next"
+            data-recommendations-next
+            aria-label="Next recommended products"
+          >
+            {% render 'icon', icon: 'arrow-right' %}
+          </button>
+        </div>
+
+        <div class="product-recommendations-custom__footer">
+          <span class="product-recommendations-custom__counter" data-recommendations-counter>
+            1 / {{ recommendations.products_count }}
+          </span>
+        </div>
+      {% endif %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Product recommendations",
+  "tag": "section",
+  "class": "section-product-recommendations-custom",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Recommended products"
+    },
+    {
+      "type": "range",
+      "id": "products_to_show",
+      "label": "Products to show",
+      "min": 4,
+      "max": 12,
+      "step": 1,
+      "default": 8
+    }
+  ],
+  "presets": [
+    {
+      "name": "Product recommendations"
+    }
+  ]
+}
+{% endschema %}

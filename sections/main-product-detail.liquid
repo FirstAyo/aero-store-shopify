@@ -77,8 +77,9 @@
           </div>
 
           <div class="product-info__rating-row">
-            <span class="product-info__stars">★★★★★</span>
-            <span class="product-info__review-count">(2)</span>
+            <div class="jdgm-widget jdgm-preview-badge">
+              {{ product.metafields.judgeme.badge }}
+            </div>
           </div>
 
           {% if product.vendor != blank %}
@@ -237,66 +238,108 @@
             </button>
           </div>
 
-          <div class="product-reviews-placeholder">
-            <h3 class="product-reviews-placeholder__heading">Customer Reviews</h3>
+          {% comment %}
+            <div class="product-reviews-placeholder">
+              <h3 class="product-reviews-placeholder__heading">Customer Reviews</h3>
 
-            <div class="product-reviews-placeholder__summary">
-              <div class="product-reviews-placeholder__stars">★★★★★</div>
-              <div class="product-reviews-placeholder__score">5.00 out of 5</div>
-            </div>
+              <div class="product-reviews-placeholder__summary">
+                <div class="product-reviews-placeholder__stars">★★★★★</div>
+                <div class="product-reviews-placeholder__score">5.00 out of 5</div>
+              </div>
 
-            <div class="product-reviews-placeholder__bars">
-              <div class="product-reviews-placeholder__bar-row">
-                <span>★★★★★</span>
-                <div class="bar"><span style="width: 80%;"></span></div>
-                <span>2</span>
-              </div>
-              <div class="product-reviews-placeholder__bar-row">
-                <span>★★★★☆</span>
-                <div class="bar"><span style="width: 0%;"></span></div>
-                <span>0</span>
-              </div>
-              <div class="product-reviews-placeholder__bar-row">
-                <span>★★★☆☆</span>
-                <div class="bar"><span style="width: 0%;"></span></div>
-                <span>0</span>
-              </div>
-              <div class="product-reviews-placeholder__bar-row">
-                <span>★★☆☆☆</span>
-                <div class="bar"><span style="width: 0%;"></span></div>
-                <span>0</span>
-              </div>
-              <div class="product-reviews-placeholder__bar-row">
-                <span>★☆☆☆☆</span>
-                <div class="bar"><span style="width: 0%;"></span></div>
-                <span>0</span>
-              </div>
-            </div>
-
-            <button type="button" class="product-reviews-placeholder__write-btn">Write a review</button>
-
-            <div class="product-reviews-placeholder__list">
-              <article class="product-reviews-placeholder__item">
-                <div class="product-reviews-placeholder__item-top">
+              <div class="product-reviews-placeholder__bars">
+                <div class="product-reviews-placeholder__bar-row">
                   <span>★★★★★</span>
-                  <span>10/30/2025</span>
+                  <div class="bar"><span style="width: 80%;"></span></div>
+                  <span>2</span>
                 </div>
-                <p class="product-reviews-placeholder__author">J.p</p>
-                <p class="product-reviews-placeholder__title">Product Quality!</p>
-                <p class="product-reviews-placeholder__body">Nice product!</p>
-              </article>
+                <div class="product-reviews-placeholder__bar-row">
+                  <span>★★★★☆</span>
+                  <div class="bar"><span style="width: 0%;"></span></div>
+                  <span>0</span>
+                </div>
+                <div class="product-reviews-placeholder__bar-row">
+                  <span>★★★☆☆</span>
+                  <div class="bar"><span style="width: 0%;"></span></div>
+                  <span>0</span>
+                </div>
+                <div class="product-reviews-placeholder__bar-row">
+                  <span>★★☆☆☆</span>
+                  <div class="bar"><span style="width: 0%;"></span></div>
+                  <span>0</span>
+                </div>
+                <div class="product-reviews-placeholder__bar-row">
+                  <span>★☆☆☆☆</span>
+                  <div class="bar"><span style="width: 0%;"></span></div>
+                  <span>0</span>
+                </div>
+              </div>
 
-              <article class="product-reviews-placeholder__item">
-                <div class="product-reviews-placeholder__item-top">
-                  <span>★★★★★</span>
-                  <span>08/15/2024</span>
-                </div>
-                <p class="product-reviews-placeholder__author">Z.K.</p>
-                <p class="product-reviews-placeholder__title">wswb h</p>
-                <p class="product-reviews-placeholder__body">enfnefenf</p>
-              </article>
+              <button type="button" class="product-reviews-placeholder__write-btn">Write a review</button>
+
+              <div class="product-reviews-placeholder__list">
+                <article class="product-reviews-placeholder__item">
+                  <div class="product-reviews-placeholder__item-top">
+                    <span>★★★★★</span>
+                    <span>10/30/2025</span>
+                  </div>
+                  <p class="product-reviews-placeholder__author">J.p</p>
+                  <p class="product-reviews-placeholder__title">Product Quality!</p>
+                  <p class="product-reviews-placeholder__body">Nice product!</p>
+                </article>
+
+                <article class="product-reviews-placeholder__item">
+                  <div class="product-reviews-placeholder__item-top">
+                    <span>★★★★★</span>
+                    <span>08/15/2024</span>
+                  </div>
+                  <p class="product-reviews-placeholder__author">Z.K.</p>
+                  <p class="product-reviews-placeholder__title">wswb h</p>
+                  <p class="product-reviews-placeholder__body">enfnefenf</p>
+                </article>
+              </div>
             </div>
+          {% endcomment %}
+
+          <!-- Start of Judge.me code -->
+          <div class="product-reviews-real">
+            <!-- Start of Judge.me code -->
+            {% assign has_legacy = false %}
+            {% if product.metafields.judgeme.widget.size > 20 %}
+              {% assign has_legacy = true %}
+            {% endif %}
+
+            <div style="clear: both"></div>
+
+            <div
+              id="judgeme_product_reviews"
+              class="jdgm-widget jdgm-review-widget"
+              data-product-title="{{ product.title | escape }}"
+              data-id="{{ product.id }}"
+              data-product-id="{{ product.id }}"
+              data-widget="review"
+              data-auto-install="false"
+              data-shop-reviews-count="{{ shop.metafields.judgeme.shop_reviews_count | default: 0 | escape }}"
+              data-entry-point="review_widget.js"
+              data-entry-key="review-widget/main.js"
+            >
+              {% if has_legacy %}
+                <div class="jdgm-legacy-widget-content" style="display: none;">
+                  {{ product.metafields.judgeme.widget }}
+                </div>
+              {% endif %}
+            </div>
+
+            {% if product.metafields.judgeme.review_widget_data %}
+              <script>
+                jdgm.data ||= {};
+                jdgm.data.reviewWidget ||= {};
+                jdgm.data.reviewWidget[{{ product.id }}] = {{ product.metafields.judgeme.review_widget_data }};
+              </script>
+            {% endif %}
+            <!-- End of Judge.me code -->
           </div>
+          <!-- End of Judge.me code -->
         </div>
       </div>
     </div>
