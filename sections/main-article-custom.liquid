@@ -1,0 +1,148 @@
+<section class="main-article-custom">
+  <div class="page-width">
+    <div class="main-article-custom__breadcrumb">
+      <a href="{{ routes.root_url }}">Home</a>
+      <span>/</span>
+      <a href="{{ blog.url }}">{{ blog.title }}</a>
+      <span>/</span>
+      <span>{{ article.title }}</span>
+    </div>
+
+    <article class="article-post">
+      {% if article.image %}
+        <div class="article-post__hero">
+          {{
+            article.image
+            | image_url: width: 1800
+            | image_tag: class: 'article-post__hero-image', loading: 'eager', alt: article.title
+          }}
+        </div>
+      {% endif %}
+
+      <div class="article-post__card">
+        <div class="article-post__meta">
+          <span>By {{ article.author }}</span>
+          <span>•</span>
+          <span>{{ article.published_at | date: '%b %d, %Y' }}</span>
+          {% if article.tags.size > 0 %}
+            <span>•</span>
+            <span>{{ article.tags.first }}</span>
+          {% endif %}
+        </div>
+
+        <h1 class="article-post__title">{{ article.title }}</h1>
+
+        {% if article.excerpt != blank %}
+          <div class="article-post__excerpt">
+            {{ article.excerpt }}
+          </div>
+        {% endif %}
+
+        <div class="article-post__content rte">
+          {{ article.content }}
+        </div>
+
+        {% if article.tags.size > 0 %}
+          <div class="article-post__tags">
+            <h3 class="article-post__tags-title">Tags</h3>
+            <div class="article-post__tags-list">
+              {% for tag in article.tags %}
+                <a href="{{ blog.url }}/tagged/{{ tag | handleize }}" class="article-post__tag">
+                  {{ tag }}
+                </a>
+              {% endfor %}
+            </div>
+          </div>
+        {% endif %}
+
+        <div class="article-post__footer">
+          <div class="article-post__share">
+            <span class="article-post__share-label">Share</span>
+            <a
+              href="https://www.facebook.com/sharer/sharer.php?u={{ shop.url }}{{ article.url }}"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="article-post__share-link"
+              >Facebook</a
+            >
+            <a
+              href="https://twitter.com/intent/tweet?url={{ shop.url }}{{ article.url }}&text={{ article.title | url_encode }}"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="article-post__share-link"
+              >Twitter</a
+            >
+            <a
+              href="https://pinterest.com/pin/create/button/?url={{ shop.url }}{{ article.url }}&description={{ article.title | url_encode }}"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="article-post__share-link"
+              >Pinterest</a
+            >
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <div class="article-post__nav">
+      <a href="{{ blog.url }}" class="article-post__nav-link">← Back to {{ blog.title }}</a>
+    </div>
+
+    {% assign related_count = 0 %}
+    {% if blog.articles_count > 1 %}
+      <section class="article-related">
+        <div class="article-related__header">
+          <h2 class="article-related__heading">Related Articles</h2>
+        </div>
+
+        <div class="article-related__grid">
+          {% for related_article in blog.articles limit: 3 %}
+            {% if related_article.handle != article.handle and related_count < 3 %}
+              {% assign related_count = related_count | plus: 1 %}
+              <article class="blog-card blog-card--modern">
+                <a href="{{ related_article.url }}" class="blog-card__image-link">
+                  {% if related_article.image %}
+                    {{
+                      related_article.image
+                      | image_url: width: 900
+                      | image_tag: class: 'blog-card__image', loading: 'lazy', alt: related_article.title
+                    }}
+                  {% endif %}
+                </a>
+
+                <div class="blog-card__body">
+                  <p class="blog-card__date">
+                    {{ related_article.published_at | date: '%-m/%-d/%Y' }}
+                  </p>
+
+                  <h3 class="blog-card__title">
+                    <a href="{{ related_article.url }}">{{ related_article.title }}</a>
+                  </h3>
+
+                  <div class="blog-card__excerpt">
+                    {% if related_article.excerpt != blank %}
+                      {{ related_article.excerpt | strip_html | truncatewords: 16 }}
+                    {% else %}
+                      {{ related_article.content | strip_html | truncatewords: 16 }}
+                    {% endif %}
+                  </div>
+
+                  <a href="{{ related_article.url }}" class="blog-card__read-more"> Read more </a>
+                </div>
+              </article>
+            {% endif %}
+          {% endfor %}
+        </div>
+      </section>
+    {% endif %}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Main article custom",
+  "tag": "section",
+  "class": "section-main-article-custom",
+  "settings": []
+}
+{% endschema %}
