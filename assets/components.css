@@ -4448,12 +4448,13 @@
 .product-inquiry-modal {
   position: fixed;
   inset: 0;
-  z-index: 130;
+  z-index: 13000;
 }
 
 .product-inquiry-modal__overlay {
   position: absolute;
   inset: 0;
+  z-index: 1;
   background: rgba(17, 17, 17, 0.42);
 }
 
@@ -4942,17 +4943,19 @@
 .cart-drawer {
   position: fixed;
   inset: 0;
-  z-index: 140;
+  z-index: 12000;
 }
 
 .cart-drawer__overlay {
   position: absolute;
+  z-index: 1;
   inset: 0;
   background: rgba(17, 17, 17, 0.38);
 }
 
 .cart-drawer__panel {
   position: absolute;
+  z-index: 2;
   top: 0;
   right: 0;
   width: min(420px, 100%);
