@@ -1,25 +1,352 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "hero": {
-      "type": "hero-slider"
+      "type": "hero-slider",
+      "blocks": {
+        "slide_QFhLwU": {
+          "type": "slide",
+          "settings": {
+            "background_image": "shopify://shop_images/vr-headset.webp",
+            "eyebrow": "DISCOUNT UPTO 75%, HURRY UP!",
+            "heading": "Next generation Virtual reality",
+            "text": "<p>VR is the most quick access to notifications, calls, messages, apps right on your wrist, reducing the constantly check.</p>",
+            "primary_button_label": "Buy Now",
+            "primary_button_link": "https://www.craftedtemplate.com/",
+            "secondary_button_label": "View More",
+            "secondary_button_link": "https://www.craftedtemplate.com/"
+          }
+        },
+        "slide_egrN9z": {
+          "type": "slide",
+          "settings": {
+            "background_image": "shopify://shop_images/vr-headset-1.jpg",
+            "eyebrow": "DISCOUNT UPTO 75%, HURRY UP!",
+            "heading": "Next generation Virtual reality",
+            "text": "<p>VR is the most quick access to notifications, calls, messages, apps right on your wrist, reducing the constantly check.</p>",
+            "primary_button_label": "Buy Now",
+            "primary_button_link": "https://www.craftedtemplate.com/",
+            "secondary_button_label": "View More",
+            "secondary_button_link": "https://www.craftedtemplate.com/"
+          }
+        }
+      },
+      "block_order": [
+        "slide_QFhLwU",
+        "slide_egrN9z"
+      ],
+      "settings": {
+        "show_arrows": true
+      }
     },
     "promo_cards": {
-      "type": "promo-card-row"
+      "type": "promo-card-row",
+      "blocks": {
+        "card_VgeB78": {
+          "type": "card",
+          "settings": {
+            "eyebrow": "NEW ARRIVAL",
+            "heading": "Latest Qpad with keyboard",
+            "button_label": "Buy Now",
+            "button_link": "https://www.craftedtemplate.com/",
+            "background_image": "shopify://shop_images/vr-headset.webp",
+            "background_position": "center center"
+          }
+        },
+        "card_XGeVFU": {
+          "type": "card",
+          "settings": {
+            "eyebrow": "NEW ARRIVAL",
+            "heading": "Latest Qpad with keyboard",
+            "button_label": "Buy Now",
+            "button_link": "https://www.craftedtemplate.com/",
+            "background_image": "shopify://shop_images/smart-watch.jpg",
+            "background_position": "center center"
+          }
+        },
+        "card_jfawdX": {
+          "type": "card",
+          "settings": {
+            "eyebrow": "NEW ARRIVAL",
+            "heading": "Latest Qpad with keyboard",
+            "button_label": "Buy Now",
+            "button_link": "https://www.craftedtemplate.com/",
+            "background_image": "shopify://shop_images/PC_Setup.jpg",
+            "background_position": "center center"
+          }
+        }
+      },
+      "block_order": [
+        "card_VgeB78",
+        "card_XGeVFU",
+        "card_jfawdX"
+      ],
+      "settings": {}
     },
     "category_circles": {
-      "type": "category-circles"
+      "type": "category-circles",
+      "blocks": {
+        "category_BMDWFW": {
+          "type": "category",
+          "settings": {
+            "collection": "smart-tvs"
+          }
+        },
+        "category_eTYd3M": {
+          "type": "category",
+          "settings": {
+            "collection": "phone-tablet"
+          }
+        },
+        "category_xfhTVQ": {
+          "type": "category",
+          "settings": {
+            "collection": "pc-laptop"
+          }
+        },
+        "category_CiaWYG": {
+          "type": "category",
+          "settings": {
+            "collection": "kitchen-appliances"
+          }
+        },
+        "category_Q49zir": {
+          "type": "category",
+          "settings": {
+            "collection": "accessories"
+          }
+        }
+      },
+      "block_order": [
+        "category_BMDWFW",
+        "category_eTYd3M",
+        "category_xfhTVQ",
+        "category_CiaWYG",
+        "category_Q49zir"
+      ],
+      "settings": {
+        "heading": "Choose your Category",
+        "text": "<p>Smartwatches provide quick access to notifications, calls, messages, and apps right on your wrist, reducing the constantly check your phone.</p>"
+      }
     },
     "featured_products": {
-  "type": "featured-products"
+      "type": "featured-products",
+      "settings": {
+        "collection": "smart-tvs",
+        "heading": "Highly Recommended",
+        "text": "<p>Electronics products continue to drive innovation and shape the way we live, work, and interact with our environment.</p>",
+        "view_all_label": "View All",
+        "products_to_show": 8
+      }
+    },
+    "promo_card_row_VgtDiw": {
+      "type": "promo-card-row",
+      "blocks": {
+        "card_UEM99B": {
+          "type": "card",
+          "settings": {
+            "eyebrow": "NEW ARRIVAL",
+            "heading": "Latest Asus Laptop",
+            "button_label": "Buy Now",
+            "button_link": "https://www.craftedtemplate.com/",
+            "background_image": "shopify://shop_images/AsusLaptop.jpg",
+            "background_position": "center center"
+          }
+        },
+        "card_Vtr6jF": {
+          "type": "card",
+          "settings": {
+            "eyebrow": "NEW ARRIVAL",
+            "heading": "Waterproof Anker Speaker",
+            "button_label": "Buy Now",
+            "button_link": "https://www.craftedtemplate.com/",
+            "background_image": "shopify://shop_images/speaker.jpg",
+            "background_position": "center center"
+          }
+        },
+        "card_4DtMWk": {
+          "type": "card",
+          "settings": {
+            "eyebrow": "NEW ARRIVAL",
+            "heading": "Google Pixel 10",
+            "button_label": "Buy Now",
+            "button_link": "https://www.craftedtemplate.com/",
+            "background_image": "shopify://shop_images/Pixel_10.png",
+            "background_position": "center center"
+          }
+        }
+      },
+      "block_order": [
+        "card_UEM99B",
+        "card_Vtr6jF",
+        "card_4DtMWk"
+      ],
+      "name": "Promo card row",
+      "settings": {}
+    },
+    "featured_products_EiDjmg": {
+      "type": "featured-products",
+      "name": "Featured products",
+      "settings": {
+        "collection": "smart-tvs",
+        "heading": "Best Selling Products",
+        "text": "<p>Electronics products continue to drive innovation and shape the way we live, work, and interact with our environment.</p>",
+        "view_all_label": "View All",
+        "products_to_show": 8
+      }
     },
     "countdown_offer": {
-  "type": "countdown-offer"
+      "type": "countdown-offer",
+      "blocks": {
+        "offer_card_VKyJ3V": {
+          "type": "offer_card",
+          "settings": {
+            "background_image": "shopify://shop_images/Pixel_10.png",
+            "eyebrow": "Smartphone Deals",
+            "heading": "Up to 50% Off phones",
+            "button_label": "Buy Now",
+            "link": "shopify://collections/phone-tablet",
+            "background_position": "center center"
+          }
+        },
+        "offer_card_njtLGq": {
+          "type": "offer_card",
+          "settings": {
+            "background_image": "shopify://shop_images/PC_Setup.jpg",
+            "eyebrow": "PC & Laptop Deals",
+            "heading": "Up to 65% Off new PC",
+            "button_label": "Buy Now",
+            "link": "shopify://collections/pc-laptop",
+            "background_position": "center center"
+          }
+        },
+        "offer_card_3QDJ3w": {
+          "type": "offer_card",
+          "settings": {
+            "background_image": "shopify://shop_images/tcl-tv-2.jpg",
+            "eyebrow": "SECURITY CAMERA",
+            "heading": "Up to 72% Off smart TV",
+            "button_label": "Buy Now",
+            "link": "shopify://products/tcl-50-s45k-series-4k-uhd-hdr-copy-1",
+            "background_position": "center center"
+          }
+        }
+      },
+      "block_order": [
+        "offer_card_VKyJ3V",
+        "offer_card_njtLGq",
+        "offer_card_3QDJ3w"
+      ],
+      "settings": {
+        "end_date": "2026-07-31T23:59:59",
+        "button_label": "Shop Now",
+        "button_link": "shopify://collections"
+      }
     },
     "testimonials_section": {
-  "type": "testimonials"
+      "type": "testimonials",
+      "blocks": {
+        "testimonial_QQg9NU": {
+          "type": "testimonial",
+          "settings": {
+            "rating": 5,
+            "title": "Dell XPS 13 Laptop",
+            "quote": "<p>“This smart home assistant has become very important part of my daily routine. From managing my schedule and setting reminders to controlling smart home devices and answering questions.”</p>",
+            "name": "James Miller",
+            "role": "CEO Tech Arena24"
+          }
+        },
+        "testimonial_FHkceA": {
+          "type": "testimonial",
+          "settings": {
+            "rating": 5,
+            "title": "Samsung 55\" TV",
+            "quote": "<p>“This smart home assistant has become very important part of my daily routine. From managing my schedule and setting reminders to controlling smart home devices and answering questions.”</p>",
+            "name": "John Doe",
+            "role": "CEO Crafted Template"
+          }
+        },
+        "testimonial_remtUt": {
+          "type": "testimonial",
+          "settings": {
+            "rating": 5,
+            "title": "Smart Home Assistant",
+            "quote": "<p>“This smart home assistant has become very important part of my daily routine. From managing my schedule and setting reminders to controlling smart home devices and answering questions.”</p>",
+            "name": "Festus A",
+            "role": "CEO Crafted Template"
+          }
+        },
+        "testimonial_qrgFfM": {
+          "type": "testimonial",
+          "settings": {
+            "rating": 5,
+            "title": "Smart Home Assistant",
+            "quote": "<p>“This smart home assistant has become very important part of my daily routine. From managing my schedule and setting reminders to controlling smart home devices and answering questions.”</p>",
+            "name": "Brain Armstrong",
+            "role": "CEO Deplex Group"
+          }
+        }
+      },
+      "block_order": [
+        "testimonial_QQg9NU",
+        "testimonial_FHkceA",
+        "testimonial_remtUt",
+        "testimonial_qrgFfM"
+      ],
+      "settings": {
+        "heading": "Our Client’s Happiness",
+        "text": "<p>The Best electronics products continue to drive innovation and shape the way we live, work, and interact with our environment.</p>"
+      }
     },
-      "instagram_gallery": {
-    "type": "instagram-gallery"
+    "instagram_gallery": {
+      "type": "instagram-gallery",
+      "blocks": {
+        "post_kegXbf": {
+          "type": "post",
+          "settings": {
+            "image": "shopify://shop_images/speaker.jpg",
+            "link": "https://www.craftedtemplate.com/templates"
+          }
+        },
+        "post_P7BUh6": {
+          "type": "post",
+          "settings": {
+            "image": "shopify://shop_images/vr-headset.webp",
+            "link": "https://www.craftedtemplate.com/templates"
+          }
+        },
+        "post_LKcnUT": {
+          "type": "post",
+          "settings": {
+            "image": "shopify://shop_images/tcl-tv-2.jpg",
+            "link": "https://www.craftedtemplate.com/templates"
+          }
+        },
+        "post_dFnJbr": {
+          "type": "post",
+          "settings": {
+            "image": "shopify://shop_images/HP-PC.jpg",
+            "link": "https://www.craftedtemplate.com/templates"
+          }
+        }
+      },
+      "block_order": [
+        "post_kegXbf",
+        "post_P7BUh6",
+        "post_LKcnUT",
+        "post_dFnJbr"
+      ],
+      "settings": {
+        "heading": "Instagram Shop"
+      }
     }
   },
   "order": [
@@ -27,6 +354,8 @@
     "promo_cards",
     "category_circles",
     "featured_products",
+    "promo_card_row_VgtDiw",
+    "featured_products_EiDjmg",
     "countdown_offer",
     "testimonials_section",
     "instagram_gallery"

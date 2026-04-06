@@ -51,10 +51,16 @@
   opacity: 1;
 }
 
+/* Main header only is sticky.
+   The announcement bar stays normal and scrolls away. */
 .site-header {
-  position: relative;
-  z-index: 20;
+  position: sticky;
+  top: 0;
+  z-index: 200;
   border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(20px);
+  background: rgba(10, 12, 20, 0.88);
+  isolation: isolate;
 }
 
 .site-header::before {
@@ -69,19 +75,19 @@
   );
 }
 
-/* Sticky glass effect */
+/* Keep these classes working if they are used elsewhere */
 .site-header--sticky {
   position: sticky;
   top: 0;
   backdrop-filter: blur(20px);
-  background: rgba(10, 12, 20, 0.65);
+  background: rgba(10, 12, 20, 0.88);
 }
 
-/* Premium gradient overlay */
 .site-header--transparent {
   background:
     radial-gradient(circle at left, rgba(0, 140, 255, 0.08), transparent 40%),
-    radial-gradient(circle at right, rgba(255, 120, 80, 0.08), transparent 40%);
+    radial-gradient(circle at right, rgba(255, 120, 80, 0.08), transparent 40%),
+    rgba(10, 12, 20, 0.88);
 }
 
 .site-header__inner {
@@ -260,10 +266,11 @@
   color: rgba(255, 255, 255, 0.82);
 }
 
+/* Mobile drawer sits above everything */
 .nav-drawer {
   position: fixed;
   inset: 0;
-  z-index: 100;
+  z-index: 9999;
   pointer-events: none;
 }
 
@@ -277,6 +284,7 @@
   background: rgba(4, 6, 12, 0.72);
   opacity: 0;
   transition: opacity var(--transition-primary);
+  z-index: 1;
 }
 
 .nav-drawer__panel {
@@ -284,7 +292,7 @@
   top: 0;
   left: 0;
   width: min(88vw, 420px);
-  height: 100%;
+  height: 100dvh;
   display: flex;
   flex-direction: column;
   background:
@@ -304,6 +312,8 @@
   transform: translateX(-100%);
   transition: transform var(--transition-primary);
   overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  z-index: 2;
 }
 
 .nav-drawer.is-open .nav-drawer__overlay {
@@ -320,6 +330,21 @@
   justify-content: space-between;
   padding: 24px 24px 20px;
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  position: sticky;
+  top: 0;
+  background:
+    radial-gradient(
+      circle at top left,
+      rgba(0, 140, 255, 0.12),
+      transparent 35%
+    ),
+    radial-gradient(
+      circle at bottom right,
+      rgba(255, 120, 80, 0.12),
+      transparent 35%
+    ),
+    #0b0d14;
+  z-index: 3;
 }
 
 .nav-drawer__logo {
@@ -519,6 +544,12 @@
 
   .site-header__menu-toggle {
     display: inline-flex;
+  }
+
+  /* Prevent page scroll when mobile drawer is open */
+  body.overflow-hidden {
+    overflow: hidden;
+    touch-action: none;
   }
 }
 

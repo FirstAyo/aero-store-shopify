@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "hero": {
@@ -8,19 +17,24 @@
       }
     },
     "about_intro": {
-      "type": "about-intro"
+      "type": "about-intro",
+      "settings": {}
     },
     "about_features": {
-      "type": "about-features-row"
+      "type": "about-features-row",
+      "settings": {}
     },
     "about_story": {
-      "type": "about-story"
+      "type": "about-story",
+      "settings": {}
     },
     "team_slider": {
-      "type": "team-slider"
+      "type": "team-slider",
+      "settings": {}
     },
     "marquee_strip": {
-      "type": "marquee-strip"
+      "type": "marquee-strip",
+      "settings": {}
     }
   },
   "order": [

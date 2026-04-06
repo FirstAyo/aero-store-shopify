@@ -1,9 +1,87 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "name": "Footer group",
   "type": "footer",
   "sections": {
     "newsletter_footer": {
-      "type": "newsletter-footer"
+      "type": "newsletter-footer",
+      "blocks": {
+        "payment_icons_AkfHqE": {
+          "type": "payment_icons",
+          "settings": {
+            "payment_1": "shopify://shop_images/Visa.png",
+            "payment_2": "shopify://shop_images/mastercard.jpg",
+            "payment_3": "shopify://shop_images/Amex_card.jpg",
+            "payment_4": "shopify://shop_images/paypal.png",
+            "payment_5": "shopify://shop_images/Discover-logo.png"
+          }
+        },
+        "link_column_YPTAqL": {
+          "type": "link_column",
+          "settings": {
+            "heading": "Information",
+            "menu": "customer-account-main-menu"
+          }
+        },
+        "link_column_VbHVxz": {
+          "type": "link_column",
+          "settings": {
+            "heading": "Quick Links",
+            "menu": "main-menu"
+          }
+        },
+        "link_column_r6UJBW": {
+          "type": "link_column",
+          "settings": {
+            "heading": "Company",
+            "menu": "customer-account-main-menu"
+          }
+        },
+        "link_column_j37UQ6": {
+          "type": "link_column",
+          "settings": {
+            "heading": "Quick Links",
+            "menu": "main-menu"
+          }
+        },
+        "contact_column_x9nicM": {
+          "type": "contact_column",
+          "settings": {
+            "heading": "Contact Info",
+            "address": "100 W 49th Ave, Vancouver, BC V5X 3B3",
+            "phone_1": "+1 672 335 1001",
+            "phone_2": "+1 672 335 1001",
+            "instagram_url": "https://www.instagram.com/crafted_template/",
+            "twitter_url": "https://x.com/c_template",
+            "facebook_url": "https://www.facebook.com/craftedtemplate/",
+            "youtube_url": "https://www.youtube.com/@craftedtemplate"
+          }
+        }
+      },
+      "block_order": [
+        "payment_icons_AkfHqE",
+        "link_column_YPTAqL",
+        "link_column_VbHVxz",
+        "link_column_r6UJBW",
+        "link_column_j37UQ6",
+        "contact_column_x9nicM"
+      ],
+      "settings": {
+        "heading": "Subscribe our Newsletter and get all of our update",
+        "placeholder": "Enter your email",
+        "button_label": "Submit Now",
+        "copyright_text": "© 2026, Aero Shopify Theme",
+        "currency_label": "CAD $ | Canada",
+        "language_label": "English"
+      }
     }
   },
   "order": [
